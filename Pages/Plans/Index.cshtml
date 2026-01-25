@@ -1,0 +1,23 @@
+﻿@page
+@model TourCompany.Pages.Plans.IndexModel
+@{
+}
+<h3 class="text-primary">Tours</h3>
+
+<br /> <br /> <br />
+
+<table>
+	<thead>
+		<tr>
+			<th>Pre-Planned</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var obj in Model.Plans)
+		{
+			<tr>
+				<td width="50%">@obj.Name</td>
+			</tr>
+		}
+	</tbody>
+</table>
