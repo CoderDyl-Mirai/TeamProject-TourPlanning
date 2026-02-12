@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using TourCompany.DataAccess;
-using TourCompany.Models;
+using TourCompany.DataAccess.DataAccess;
+using TourCompany.Models.Models;
 
 namespace TourCompany.Pages.Plans
 {
