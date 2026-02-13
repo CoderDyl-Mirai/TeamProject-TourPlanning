@@ -11,6 +11,7 @@ namespace TourCompany.DataAccess.DataAccess
 
         }
 
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<Plan> Plans { get; set; }
     }
 }
