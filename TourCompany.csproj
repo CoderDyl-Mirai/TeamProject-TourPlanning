@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TourCompany.DataAccess\TourCompany.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

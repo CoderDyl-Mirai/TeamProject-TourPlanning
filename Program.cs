@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using TourCompany.DataAccess;
+using TourCompany.DataAccess.DataAccess;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
