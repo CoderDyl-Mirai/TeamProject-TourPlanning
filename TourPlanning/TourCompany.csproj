@@ -19,4 +19,9 @@
     <ProjectReference Include="..\TourCompany.DataAccess\TourCompany.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Plans\Admin\" />
+    <Folder Include="Pages\Plans\Customer\" />
+  </ItemGroup>
+
 </Project>
