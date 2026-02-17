@@ -1,0 +1,25 @@
+﻿@page
+@model TourCompany.Pages.Admin.Bookings.IndexModel
+@{
+}
+<h3 class="text-primary">Bookings</h3>
+
+<br />
+<br />
+<br />
+
+<table>
+	<thead>
+		<tr>
+			<th>Booking Reference</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var obj in Model.Bookings)
+		{
+			<tr>
+				<td width="50%">@obj.Id</td>
+			</tr>
+		}
+	</tbody>
+</table>
