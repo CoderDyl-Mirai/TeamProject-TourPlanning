@@ -7,12 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Admin\Tours\Admin\**" />
+    <Compile Remove="Pages\Admin\Tours\Customer\**" />
+    <Content Remove="Pages\Admin\Tours\Admin\**" />
+    <Content Remove="Pages\Admin\Tours\Customer\**" />
+    <EmbeddedResource Remove="Pages\Admin\Tours\Admin\**" />
+    <EmbeddedResource Remove="Pages\Admin\Tours\Customer\**" />
+    <None Remove="Pages\Admin\Tours\Admin\**" />
+    <None Remove="Pages\Admin\Tours\Customer\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TourCompany.DataAccess\TourCompany.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Plans\Admin\" />
-    <Folder Include="Pages\Plans\Customer\" />
+    <Folder Include="Pages\Customer\" />
   </ItemGroup>
 
   <ItemGroup>

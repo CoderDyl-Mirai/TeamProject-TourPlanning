@@ -10,7 +10,6 @@ namespace TourCompany.Models.Models
     public class Customer
     {
         [Key]
-
         public int Id { get; set; }
 
         [Required]
@@ -22,15 +21,15 @@ namespace TourCompany.Models.Models
         [Required]
         public string? Email { get; set; }
 
-        public string? Phone {  get; set; }
+        public string? Phone { get; set; }
 
         public string? CreditCardNum { get; set; }
 
-        public DateOnly Date { get; set; }
+        public DateOnly ExpiryDate { get; set; }
 
-        public int CSV {  get; set; }   
-        
+        public int CSV { get; set; }
 
+        public List<Booking>? Bookings { get; set; }
 
     }
 }

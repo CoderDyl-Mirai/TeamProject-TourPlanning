@@ -1,5 +1,5 @@
 ﻿@page
-@model TourCompany.Pages.Plans.IndexModel
+@model TourCompany.Pages.Admin.Tours.IndexModel
 @{
 }
 <h3 class="text-primary">Tours</h3>
@@ -9,11 +9,11 @@
 <table>
 	<thead>
 		<tr>
-			<th>Pre-Planned</th>
+			<th>Available Tours</th>
 		</tr>
 	</thead>
 	<tbody>
-		@foreach(var obj in Model.Plans)
+		@foreach(var obj in Model.Tours)
 		{
 			<tr>
 				<td width="50%">@obj.Name</td>

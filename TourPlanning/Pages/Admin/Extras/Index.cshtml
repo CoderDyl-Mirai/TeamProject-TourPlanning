@@ -1,0 +1,26 @@
+﻿@page
+@model TourCompany.Pages.Admin.Extras.IndexModel
+@{
+}
+<h3 class="text-primary">Extras</h3>
+
+<br />
+<br />
+<br />
+
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var obj in Model.Extras)
+		{
+			<tr>
+				<td width="50%">@obj.Name</td>
+			</tr>
+		}
+	</tbody>
+</table>
+

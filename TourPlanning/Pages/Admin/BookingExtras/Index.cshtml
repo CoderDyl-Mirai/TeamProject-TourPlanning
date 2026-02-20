@@ -1,0 +1,26 @@
+﻿@page
+@model TourCompany.Pages.Admin.BookingExtras.IndexModel
+@{
+}
+<h3 class="text-primary">BookingExtras</h3>
+
+<br />
+<br />
+<br />
+
+<table>
+	<thead>
+		<tr>
+			<th>Quantity</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var obj in Model.BookingExtras)
+		{
+			<tr>
+				<td width="50%">@obj.Qty</td>
+			</tr>
+		}
+	</tbody>
+</table>
+

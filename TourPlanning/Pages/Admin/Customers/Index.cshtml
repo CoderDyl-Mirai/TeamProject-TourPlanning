@@ -1,0 +1,25 @@
+﻿@page
+@model TourCompany.Pages.Admin.Customers.IndexModel
+@{
+}
+<h3 class="text-primary">Customers</h3>
+
+<br />
+<br />
+<br />
+
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var obj in Model.Customers)
+		{
+			<tr>
+				<td width="50%">@(obj.Firstname + " " +obj.Lastname)</td>
+			</tr>
+		}
+	</tbody>
+</table>
