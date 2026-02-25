@@ -30,11 +30,6 @@ namespace TourCompany.Pages.Admin.Tours
             string wwwRootFolder = _webHostEnvironment.WebRootPath;
             var tourFromDB = _unitOfWork.TourRepository.Get(Tour.Id);
 
-            if (tourFromDB == null)
-            {
-                return NotFound();
-            }
-
             if (tourFromDB.Image != null && tourFromDB.Image != "")
             {
                 var oldFile = Path.Combine(wwwRootFolder, tourFromDB.Image.TrimStart('\\'));
@@ -42,13 +37,12 @@ namespace TourCompany.Pages.Admin.Tours
                 {
                     System.IO.File.Delete(oldFile);
                 }
-            }
 
-            if (ModelState.IsValid)
-            {
                 _unitOfWork.TourRepository.Delete(tourFromDB);
                 _unitOfWork.Save();
             }
+
+            
 
             return RedirectToPage("Index");
         }
