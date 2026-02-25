@@ -8,15 +8,16 @@ namespace TourCompany.Pages.Admin.Tours
 {
     public class IndexModel : PageModel
     {
-        private readonly TourDBContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         public IEnumerable<Tour> Tours;
-        public IndexModel(TourDBContext dbContext)
+
+        public IndexModel(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            Tours = await _dbContext.Tours.ToListAsync();
+            Tours = _unitOfWork.TourRepo.GetAll();
         }
     }
 }

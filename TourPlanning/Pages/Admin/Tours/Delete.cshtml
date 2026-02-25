@@ -1,0 +1,86 @@
+﻿@page
+@model TourCompany.Pages.Admin.Tours.DeleteModel
+@{
+}
+<form method="post" enctype="multipart/form-data">
+	<input hidden asp-for="Tour.Id" />
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<div class="col-9">
+
+				<h2 class="text-primary pl-3">Delete Tour</h2>
+				<div class="mb-3">
+					<label asp-for="@Model.Tour.Name"></label>
+					<input asp-for="@Model.Tour.Name" class="form-control" />
+					<span asp-validation-for="@Model.Tour.Name" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="@Model.Tour.Description"></label>
+					<textarea asp-for="@Model.Tour.Description" class="form-control" rows="5"></textarea>
+					<span asp-validation-for="@Model.Tour.Description" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="@Model.Tour.Price"></label>
+					<input asp-for="@Model.Tour.Price" class="form-control" />
+					<span asp-validation-for="@Model.Tour.Price" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="@Model.Tour.Date"></label>
+					<input asp-for="@Model.Tour.Date" class="form-control" />
+					<span asp-validation-for="@Model.Tour.Date" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="@Model.Tour.StartTime"></label>
+					<input asp-for="@Model.Tour.StartTime" class="form-control" />
+					<span asp-validation-for="@Model.Tour.StartTime" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="@Model.Tour.Duration"></label>
+					<input asp-for="@Model.Tour.Duration" class="form-control" />
+					<span asp-validation-for="@Model.Tour.Duration" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="@Model.Tour.Location"></label>
+					<input asp-for="@Model.Tour.Location" class="form-control" />
+					<span asp-validation-for="@Model.Tour.Location" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="@Model.Tour.MaxCapacity"></label>
+					<input asp-for="@Model.Tour.MaxCapacity" class="form-control" />
+					<span asp-validation-for="@Model.Tour.MaxCapacity" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="@Model.Tour.MinCapacity"></label>
+					<input asp-for="@Model.Tour.MinCapacity" class="form-control" />
+					<span asp-validation-for="@Model.Tour.MinCapacity" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="@Model.Tour.Image">FileUpload</label>
+					<input type="file" name="files" id="upLoadBox" class="form-control" />
+				</div>
+
+
+			</div>
+			<div class="col-3">
+				<img src="@Model.Tour.Image" />
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary">Delete</button>
+		<a asp-page="Index" class="btn btn-secondary">Back to Index</a>
+	</div>
+
+</form>
+@section Scripts {
+	@{
+		<partial name="_validationScriptsPartial"></partial>
+	}
+}
