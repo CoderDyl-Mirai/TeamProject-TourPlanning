@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TourCompany.Models.Models;
+using TourCompany.Services;
 
 namespace TourCompany.Pages.Admin.Tours
 {
@@ -18,12 +19,15 @@ namespace TourCompany.Pages.Admin.Tours
         }
 
         public Tour Tour { get; set; }
-
+        public void OnGet(int id)
+        {
+            Tour = _unitOfWork.TourRepository.Get(id);
+        }
         public IActionResult OnPost()
         {
             string wwwRootFolder = _webHostEnvironment.WebRootPath;
             var files = HttpContext.Request.Form.Files;
-            var tourFromDB = _unitOfWork.TourRepo.Get(Tour.Id);
+            var tourFromDB = _unitOfWork.TourRepository.Get(Tour.Id);
 
             if (files.Count > 0)
             {
@@ -55,7 +59,7 @@ namespace TourCompany.Pages.Admin.Tours
             if (ModelState.IsValid)
             {
 
-                _unitOfWork.TourRepo.Update(Tour);
+                _unitOfWork.TourRepository.Update(Tour);
                 _unitOfWork.Save();
             }
             return RedirectToPage("Index");

@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TourCompany.DataAccess\TourCompany.DataAccess.csproj" />
+    <ProjectReference Include="..\TourCompany.Services\TourCompany.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

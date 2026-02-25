@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TourCompany.Models.Models;
-
+using TourCompany.Services;
 namespace TourCompany.Pages.Admin.Tours
 {
     [BindProperties]
@@ -39,7 +39,7 @@ namespace TourCompany.Pages.Admin.Tours
             Tour.Image = @"\Images\Tours\" + new_filename + extension;
             if (ModelState.IsValid)
             {
-                _unitOfWork.TourRepo.Add(Tour);
+                _unitOfWork.TourRepository.Add(Tour);
                 _unitOfWork.Save();
             }
             return RedirectToPage("Index");

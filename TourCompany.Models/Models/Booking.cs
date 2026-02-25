@@ -12,7 +12,7 @@ namespace TourCompany.Models.Models
     {
         [Key]
         public int Id { get; set; }
-
+        [Required]
         public int TicketAmount { get; set; }
 
         [Range(0.01, 500, ErrorMessage = "Price must be between €0.01 and €500.00")]
@@ -20,8 +20,6 @@ namespace TourCompany.Models.Models
         public decimal TotalPrice { get; set; }
 
         public DateTime Date { get; set; }
-
-        public string? Email { get; set; }
 
         public int CustomerId { get; set; }
         public Customer? Customer { get; set; }
