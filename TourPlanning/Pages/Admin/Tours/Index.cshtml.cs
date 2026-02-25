@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TourCompany.DataAccess.DataAccess;
 using TourCompany.Models.Models;
+using TourCompany.Services;
 
 namespace TourCompany.Pages.Admin.Tours
 {
@@ -17,7 +18,7 @@ namespace TourCompany.Pages.Admin.Tours
         }
         public void OnGet()
         {
-            Tours = _unitOfWork.TourRepo.GetAll();
+            Tours = _unitOfWork.TourRepository.GetAll();
         }
     }
 }

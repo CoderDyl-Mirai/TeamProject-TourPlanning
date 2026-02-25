@@ -20,12 +20,10 @@ namespace TourCompany.DataAccess.Repository
         {
             var tourFromDB = _dBContext.Tours.FirstOrDefault(tourFromDB => tourFromDB.Id == tour.Id);
             tourFromDB.Name = tour.Name;
-            tourFromDB.Category = tour.Category;
             tourFromDB.Description = tour.Description;
             tourFromDB.Price = tour.Price;
             tourFromDB.MaxCapacity = tour.MaxCapacity;
             tourFromDB.MinCapacity = tour.MinCapacity;
-            tourFromDB.StartTime = tour.StartTime;
             tourFromDB.Duration = tour.Duration;
             tourFromDB.Date = tour.Date;
             tourFromDB.Location = tour.Location;

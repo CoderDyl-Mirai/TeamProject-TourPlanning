@@ -11,8 +11,6 @@ namespace TourCompany.Models.Models
         [Required]
         public string? Name { get; set; }
 
-        public string? Category { get; set; }
-
         public string? Description { get; set; }
 
         [Range(0.01, 500, ErrorMessage = "Price must be between €0.01 and €500.00")]
@@ -25,7 +23,6 @@ namespace TourCompany.Models.Models
 
         public int MinCapacity { get; set; }
 
-        public TimeOnly StartTime { get; set; }
 
         public int Duration { get; set; }
 

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TourCompany.Models.Models;
+using TourCompany.Services;
 
 namespace TourCompany.Pages.Admin.Tours
 {
@@ -21,13 +22,13 @@ namespace TourCompany.Pages.Admin.Tours
 
         public void OnGet(int id)
         {
-            Tour = _unitOfWork.TourRepo.Get(id);
+            Tour = _unitOfWork.TourRepository.Get(id);
         }
 
         public IActionResult OnPost()
         {
             string wwwRootFolder = _webHostEnvironment.WebRootPath;
-            var tourFromDB = _unitOfWork.TourRepo.Get(Tour.Id);
+            var tourFromDB = _unitOfWork.TourRepository.Get(Tour.Id);
 
             if (tourFromDB == null)
             {
@@ -45,7 +46,7 @@ namespace TourCompany.Pages.Admin.Tours
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.TourRepo.Delete(tourFromDB);
+                _unitOfWork.TourRepository.Delete(tourFromDB);
                 _unitOfWork.Save();
             }
 
