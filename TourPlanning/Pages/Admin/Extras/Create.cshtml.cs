@@ -15,7 +15,7 @@ namespace TourCompany.Pages.Admin.Extras
             _webHostEnvironment = webHostEnvironment;
             _unitOfWork = unitOfWork;
         }
-
+        [BindProperty]
         public Extra Extra { get; set; }
         public void OnGet()
         {

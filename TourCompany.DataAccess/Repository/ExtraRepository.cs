@@ -15,13 +15,6 @@ namespace TourCompany.DataAccess.Repository
         {
             _dBContext = dbContext;
         }
-        public void Update(Extra extra)
-        {
-            var extraFromDB = _dBContext.Tours.FirstOrDefault(extraFromDB => extraFromDB.Id == extra.Id);
-            extraFromDB.Name = extra.Name;
-            extraFromDB.Description = extra.Description;
-            extraFromDB.Price = extra.Price;
-            extraFromDB.Id = extra.TourId;
-        }
+        
     }
 }

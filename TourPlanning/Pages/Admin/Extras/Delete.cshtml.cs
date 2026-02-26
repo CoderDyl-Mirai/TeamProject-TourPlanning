@@ -12,13 +12,14 @@ namespace TourCompany.Pages.Admin.Extras
         {
             _unitOfWork = unitOfWork;
         }
+        [BindProperty]
         public Extra Extra { get; set; }
         public void OnGet(int id)
         {
             Extra = _unitOfWork.ExtraRepository.Get(id);
         }
 
-        public IActionResult OnPost(Extra Extra)
+        public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
