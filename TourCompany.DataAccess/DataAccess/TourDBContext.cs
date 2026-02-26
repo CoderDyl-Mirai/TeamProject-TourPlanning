@@ -19,5 +19,10 @@ namespace TourCompany.DataAccess.DataAccess
 
         public DbSet<BookingExtra> BookingExtras { get; set; }
         public DbSet<Tour> Tours { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed();
+        }
     }
 }
