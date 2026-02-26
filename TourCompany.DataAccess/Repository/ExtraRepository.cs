@@ -11,9 +11,10 @@ namespace TourCompany.DataAccess.Repository
     public class ExtraRepository: Repository<Extra>, IExtraRepository
     {
         private readonly TourDBContext _dBContext;
-        public ExtraRepository(TourDBContext dbContext): base(dbContext)
+        public ExtraRepository(TourDBContext dbContext) : base(dbContext)
         {
             _dBContext = dbContext;
         }
+        
     }
 }

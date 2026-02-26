@@ -9,5 +9,7 @@ namespace TourCompany.DataAccess.Repository
 {
     public interface IExtraRepository : IRepository<Extra>
     {
+        public void Update(Extra extra);
+
     }
 }
