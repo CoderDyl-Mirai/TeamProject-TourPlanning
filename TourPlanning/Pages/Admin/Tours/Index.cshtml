@@ -20,33 +20,32 @@
 <br />
 <br />
 
+<div style="padding-bottom: 80px;">
 <table class="table table-bordered table-striped">
 	<thead>
 		<tr>
 			<th>ID</th>
 			<th>Name</th>
-			<th>Description</th>
 			<th>Price</th>
 			<th>Date</th>
 			<th>Duration</th>
 			<th>Location</th>
-			<th>Max Capacity</th>
-			<th>Min Capacity</th>
+			<th>MaxCap</th>
+			<th>MinCap</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach (var obj in Model.Tours)
 		{
 			<tr>
-				<td width="4%">@obj.Id</td>
+				<td width="5%">@obj.Id</td>
 				<td width="10%">@obj.Name</td>
-				<td width="20%">@obj.Description</td>
-				<td width="8%">@obj.Price</td>
-				<td width="8%">@obj.Date</td>
-				<td width="8%">@obj.Duration</td>
-				<td width="15%">@obj.Location</td>
-				<td width="4%">@obj.MaxCapacity</td>
-				<td width="4%">@obj.MinCapacity</td>
+				<td width="10%">€@obj.Price</td>
+				<td width="10%">@obj.Date</td>
+				<td width="5%">@obj.Duration</td>
+				<td width="10%">@obj.Location</td>
+				<td width="5%">@obj.MaxCapacity</td>
+				<td width="5%">@obj.MinCapacity</td>
 				<td>
 					<a asp-page="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">Edit</a>
 				</td>
@@ -57,3 +56,4 @@
 		}
 	</tbody>
 </table>
+</div>

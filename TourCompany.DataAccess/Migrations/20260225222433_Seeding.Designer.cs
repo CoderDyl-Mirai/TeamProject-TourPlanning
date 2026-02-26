@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourCompany.DataAccess.DataAccess;
 
@@ -11,9 +12,11 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    partial class TourDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260225222433_Seeding")]
+    partial class Seeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,26 +56,6 @@ namespace TourCompany.DataAccess.Migrations
                     b.HasIndex("TourId");
 
                     b.ToTable("Bookings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CustomerId = 1,
-                            Date = new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc),
-                            TicketAmount = 2,
-                            TotalPrice = 60.00m,
-                            TourId = 4
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CustomerId = 2,
-                            Date = new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc),
-                            TicketAmount = 4,
-                            TotalPrice = 68.00m,
-                            TourId = 3
-                        });
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.BookingExtra", b =>
@@ -136,30 +119,6 @@ namespace TourCompany.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CSV = 481,
-                            CreditCardNum = "7391630561936204",
-                            Email = "Joe_Bloggs@email.com",
-                            ExpiryDate = new DateOnly(2028, 2, 17),
-                            Firstname = "Joe",
-                            Lastname = "Bloggs",
-                            Phone = "0986493740"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CSV = 123,
-                            CreditCardNum = "3905279573137936",
-                            Email = "JaneSmith@email.com",
-                            ExpiryDate = new DateOnly(2032, 4, 3),
-                            Firstname = "Jane",
-                            Lastname = "Smith",
-                            Phone = "0867491503"
-                        });
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.Extra", b =>
@@ -189,40 +148,6 @@ namespace TourCompany.DataAccess.Migrations
                     b.HasIndex("TourId");
 
                     b.ToTable("Extras");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "",
-                            Name = "Picnic",
-                            Price = 20.00m,
-                            TourId = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "",
-                            Name = "Audio Guide",
-                            Price = 4.00m,
-                            TourId = 5
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "",
-                            Name = "Pour a Pint",
-                            Price = 5.00m,
-                            TourId = 4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "",
-                            Name = "Bike Rental",
-                            Price = 8.00m,
-                            TourId = 1
-                        });
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.Tour", b =>
@@ -265,86 +190,6 @@ namespace TourCompany.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tours");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Date = new DateTime(2026, 6, 15, 10, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Discover Glenveagh National Park on a scenic walking tour through rugged mountains, peaceful lakeshores, and native woodland. Follow tranquil paths to Glenveagh Castle, explore beautiful gardens, and experience breathtaking views, rich wildlife, and the park’s unique natural and cultural heritage.",
-                            Duration = 120,
-                            Image = "\\Images\\Tours\\Glenveagh.jpg",
-                            Location = "Donegal",
-                            MaxCapacity = 20,
-                            MinCapacity = 5,
-                            Name = "Glenveagh",
-                            Price = 15.00m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Date = new DateTime(2026, 7, 2, 13, 30, 0, 0, DateTimeKind.Utc),
-                            Description = "Experience Fanad Lighthouse with a local guide, exploring the peninsula’s history. Learn about lighthouse keepers’ lives, stories of love, loss, and resilience. Discover how light has evolved over centuries with modern technology. Experience an authentic insight into life at this iconic Irish landmark.",
-                            Duration = 50,
-                            Image = "\\Images\\Tours\\Fanad.jpg",
-                            Location = "Donegal",
-                            MaxCapacity = 12,
-                            MinCapacity = 4,
-                            Name = "Fanad Lighthouse",
-                            Price = 12.50m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Date = new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Join our Sliabh Liag walking tour from the Visitor Centre, exploring stunning cliffs, local culture, and history. Enjoy daily departures, guided insights into language and heritage, and breathtaking scenery, supported by DCC, Fáilte Ireland, and EU funding for an immersive and memorable experience.",
-                            Duration = 90,
-                            Image = "\\Images\\Tours\\Slieve.jpg",
-                            Location = "Donegal",
-                            MaxCapacity = 25,
-                            MinCapacity = 6,
-                            Name = "Slieve League",
-                            Price = 17.00m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Date = new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc),
-                            Description = "Join an intimate Guinness tasting at St. James’s Gate, where a beer specialist guides you through flavors, aromas, and origins. Share stories with the group while exploring iconic Guinness varieties and learn the secrets behind Ireland’s famous brew in a memorable, immersive experience.",
-                            Duration = 60,
-                            Image = "\\Images\\Tours\\Guinness.jpg",
-                            Location = "Dublin",
-                            MaxCapacity = 15,
-                            MinCapacity = 4,
-                            Name = "Guinness",
-                            Price = 30.00m
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Date = new DateTime(2026, 7, 12, 11, 30, 0, 0, DateTimeKind.Utc),
-                            Description = "Explore Kilmainham Gaol and uncover Ireland’s history through the stories of prisoners—from ordinary criminals to freedom fighters. Learn about the 1798 Rebellion, 1916 Easter Rising,  and Civil War, each chapter revealing the struggles and resilience that shaped Ireland’s journey to independence.",
-                            Duration = 60,
-                            Image = "\\Images\\Tours\\Kilmainham.jpg",
-                            Location = "Dublin",
-                            MaxCapacity = 28,
-                            MinCapacity = 7,
-                            Name = "Kilmainham Gaol",
-                            Price = 25.00m
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Date = new DateTime(2026, 7, 25, 9, 45, 0, 0, DateTimeKind.Utc),
-                            Description = "Experience the Titanic story through ten interactive galleries in a self-guided tour. Discover the sights, sounds, and stories of the ship, its passengers, and the city that built her, for the world’s most authentic and immersive retelling of this iconic maritime journey.",
-                            Duration = 100,
-                            Image = "\\Images\\Tours\\Titanic.jpg",
-                            Location = "Belfast",
-                            MaxCapacity = 20,
-                            MinCapacity = 5,
-                            Name = "Titanic Belfast",
-                            Price = 27.50m
-                        });
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.Booking", b =>

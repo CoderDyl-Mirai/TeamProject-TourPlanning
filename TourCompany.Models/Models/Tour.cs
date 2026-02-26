@@ -23,7 +23,6 @@ namespace TourCompany.Models.Models
 
         public int MinCapacity { get; set; }
 
-
         public int Duration { get; set; }
 
         public DateTime Date { get; set; }
