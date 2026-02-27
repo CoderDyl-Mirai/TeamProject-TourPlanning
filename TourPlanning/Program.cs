@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TourCompany.DataAccess.DataAccess;
+using TourCompany.Pages;
 using TourCompany.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<TourDBContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<TourDBContext>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Login";
+    options.AccessDeniedPath = "/AccessDenied";
+});
 
 var app = builder.Build();
 
@@ -24,6 +35,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+await app.CreateRolesAsync(builder.Configuration);
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
