@@ -1,10 +1,12 @@
 ﻿@page
 @model TourCompany.Pages.LoginModel
+
 @{
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <form method="post">
-	<div class="border p-3 mt-4">
+	<div class="border p-3 mt-4 mb-5">
 		<div asp-validation-summary="All" class="text-danger"></div>
 		<div class="row pb-2">
 			<h2 class="text-primary pl-3">
@@ -29,6 +31,9 @@
 
 		<button type="submit" class="btn btn-primary">Login</button>
 		<a asp-page="Index" button type="submit" class="btn btn-outline-secondary">Home</a>
+		<br /><br />
+		<a asp-page="Register" button type="submit" class="text-info">Not A User? Sign Up</a>
+
 	</div>
 </form>
 
@@ -37,4 +42,13 @@
 		<partial name="_validationScriptsPartial" />
 	}
 }
+<script>
+	$("nav").html(`
+			<div class="container">
+				<a class="navbar-brand" asp-area="" asp-page="/Index">Terrific Tours</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button></div>`)
+</script>
 

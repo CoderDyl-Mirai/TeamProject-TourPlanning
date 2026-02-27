@@ -2,6 +2,8 @@
 @model TourCompany.Pages.LogoutModel
 @{
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <form method="post">
 	<div class="border p-3 mt-4">
 		<div asp-validation-summary="All" class="text-danger"></div>
@@ -14,10 +16,20 @@
 		<div class="mb-3">
 			<p>Are you sure you want to logout</p>
 			<p>
-				<button class="btn btn-primary" asp-page-handler="Logout">Yes</button>
+				<button class="btn btn-primary" asp-page-handler="Index">Yes</button>
 				<button class="btn btn-outline-secondary ml-5" asp-page-handler="NoLogout">No</button>
 			</p>
 		</div>
 
 	</div>
 </form>
+
+<script>
+	$("nav").html(`
+			<div class="container">
+				<a class="navbar-brand" asp-area="" asp-page="/Index">Terrific Tours</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button></div>`)
+</script>
