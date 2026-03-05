@@ -23,17 +23,17 @@ namespace TourCompany.DataAccess.DataAccess
                 new Tour { Id = 6, Name = "Titanic Belfast", Description = "Experience the Titanic story through ten interactive galleries in a self-guided tour. Discover the sights, sounds, and stories of the ship, its passengers, and the city that built her, for the world’s most authentic and immersive retelling of this iconic maritime journey.", Price = 27.50m, Image = @"\Images\Tours\Titanic.jpg", MaxCapacity = 20, MinCapacity = 5, Duration = 100, Date = new DateTime(2026, 7, 25, 9, 45, 0, DateTimeKind.Utc), Location = "Belfast" }
                 );
 
-            modelBuilder.Entity<Booking>()
+            /*modelBuilder.Entity<Booking>()
                 .HasData(
-                new Booking { Id = 1, TicketAmount = 2, TotalPrice = 60.00m, Date = new DateTime(2026, 7, 21, 14, 45, 0, DateTimeKind.Utc), CustomerId = 1, TourId = 4 },
-                new Booking { Id = 2, TicketAmount = 4, TotalPrice = 68.00m, Date = new DateTime(2026, 6, 15, 15, 0, 0, DateTimeKind.Utc), CustomerId = 2, TourId = 3 }
+                new Booking { Id = 1, TicketAmount = 2, TotalPrice = 60.00m, Date = new DateTime(2026, 7, 21, 14, 45, 0, DateTimeKind.Utc), CustomerId = "1", TourId = 4 },
+                new Booking { Id = 2, TicketAmount = 4, TotalPrice = 68.00m, Date = new DateTime(2026, 6, 15, 15, 0, 0, DateTimeKind.Utc), CustomerId = "2", TourId = 3 }
                 );
 
             modelBuilder.Entity<Customer>()
                 .HasData(
                 new Customer { Id = 1, Firstname = "Joe", Lastname = "Bloggs", Email = "Joe_Bloggs@email.com", Phone = "0986493740", CreditCardNum = "7391630561936204", ExpiryDate = new DateOnly(2028, 2, 17), CSV = 481 },
                 new Customer { Id = 2, Firstname = "Jane", Lastname = "Smith", Email = "JaneSmith@email.com", Phone = "0867491503", CreditCardNum = "3905279573137936", ExpiryDate = new DateOnly(2032, 4, 3), CSV = 123 }
-                );
+                );*/
 
             modelBuilder.Entity<Extra>()
                 .HasData(

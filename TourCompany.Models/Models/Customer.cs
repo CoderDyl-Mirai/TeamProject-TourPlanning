@@ -32,7 +32,7 @@ namespace TourCompany.Models.Models
 
         public DateOnly ExpiryDate { get; set; }
 
-        [Range(100, 999, ErrorMessage = "CSV must be 3 digits")]
+        //[Range(100, 999, ErrorMessage = "CSV must be 3 digits")]
         public int CSV { get; set; }
 
         public List<Booking>? Bookings { get; set; }

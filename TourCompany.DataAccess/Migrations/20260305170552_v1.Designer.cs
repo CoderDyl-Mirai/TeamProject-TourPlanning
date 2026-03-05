@@ -12,8 +12,8 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    [Migration("20260226005403_s2")]
-    partial class s2
+    [Migration("20260305170552_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,18 +33,14 @@ namespace TourCompany.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("TicketAmount")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasPrecision(6, 2)
-                        .HasColumnType("decimal(6,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("TourId")
                         .HasColumnType("int");
@@ -56,26 +52,6 @@ namespace TourCompany.DataAccess.Migrations
                     b.HasIndex("TourId");
 
                     b.ToTable("Bookings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CustomerId = 1,
-                            Date = new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc),
-                            TicketAmount = 2,
-                            TotalPrice = 60.00m,
-                            TourId = 4
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CustomerId = 2,
-                            Date = new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc),
-                            TicketAmount = 4,
-                            TotalPrice = 68.00m,
-                            TourId = 3
-                        });
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.BookingExtra", b =>
@@ -139,30 +115,6 @@ namespace TourCompany.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CSV = 481,
-                            CreditCardNum = "7391630561936204",
-                            Email = "Joe_Bloggs@email.com",
-                            ExpiryDate = new DateOnly(2028, 2, 17),
-                            Firstname = "Joe",
-                            Lastname = "Bloggs",
-                            Phone = "0986493740"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CSV = 123,
-                            CreditCardNum = "3905279573137936",
-                            Email = "JaneSmith@email.com",
-                            ExpiryDate = new DateOnly(2032, 4, 3),
-                            Firstname = "Jane",
-                            Lastname = "Smith",
-                            Phone = "0867491503"
-                        });
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.Extra", b =>
@@ -287,7 +239,7 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = 2,
                             Date = new DateTime(2026, 7, 2, 13, 30, 0, 0, DateTimeKind.Utc),
-                            Description = "Experience Fanad Lighthouse with a local guide, exploring the peninsula’s history. Learn about lighthouse keepers’ lives, stories of love, loss, and resilience, and discover how the light has evolved over centuries with modern technology. An authentic, memorable insight into life at this iconic Irish landmark.",
+                            Description = "Experience Fanad Lighthouse with a local guide, exploring the peninsula’s history. Learn about lighthouse keepers’ lives, stories of love, loss, and resilience. Discover how light has evolved over centuries with modern technology. Experience an authentic insight into life at this iconic Irish landmark.",
                             Duration = 50,
                             Image = "\\Images\\Tours\\Fanad.jpg",
                             Location = "Donegal",
@@ -319,14 +271,14 @@ namespace TourCompany.DataAccess.Migrations
                             Location = "Dublin",
                             MaxCapacity = 15,
                             MinCapacity = 4,
-                            Name = "Guinness Storehouse",
+                            Name = "Guinness",
                             Price = 30.00m
                         },
                         new
                         {
                             Id = 5,
                             Date = new DateTime(2026, 7, 12, 11, 30, 0, 0, DateTimeKind.Utc),
-                            Description = "Explore Kilmainham Gaol and uncover Ireland’s history through the stories of prisoners—from ordinary criminals to freedom fighters. Learn about the 1798 Rebellion, 1916 Easter Rising, Anglo-Irish War, and Civil War, each chapter revealing the struggles and resilience that shaped Ireland’s journey to independence.",
+                            Description = "Explore Kilmainham Gaol and uncover Ireland’s history through the stories of prisoners—from ordinary criminals to freedom fighters. Learn about the 1798 Rebellion, 1916 Easter Rising,  and Civil War, each chapter revealing the struggles and resilience that shaped Ireland’s journey to independence.",
                             Duration = 60,
                             Image = "\\Images\\Tours\\Kilmainham.jpg",
                             Location = "Dublin",
@@ -352,11 +304,9 @@ namespace TourCompany.DataAccess.Migrations
 
             modelBuilder.Entity("TourCompany.Models.Models.Booking", b =>
                 {
-                    b.HasOne("TourCompany.Models.Models.Customer", "Customer")
+                    b.HasOne("TourCompany.Models.Models.Customer", null)
                         .WithMany("Bookings")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("TourCompany.Models.Models.Tour", "Tour")
                         .WithMany("Bookings")
@@ -364,15 +314,13 @@ namespace TourCompany.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
-
                     b.Navigation("Tour");
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.BookingExtra", b =>
                 {
                     b.HasOne("TourCompany.Models.Models.Booking", "Booking")
-                        .WithMany("BookingExtras")
+                        .WithMany()
                         .HasForeignKey("BookingId");
 
                     b.HasOne("TourCompany.Models.Models.Extra", "Extra")
@@ -393,11 +341,6 @@ namespace TourCompany.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Tour");
-                });
-
-            modelBuilder.Entity("TourCompany.Models.Models.Booking", b =>
-                {
-                    b.Navigation("BookingExtras");
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.Customer", b =>
