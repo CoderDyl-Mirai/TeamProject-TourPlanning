@@ -9,5 +9,6 @@ namespace TourCompany.DataAccess.Repository
 {
     public interface ICustomerRepository : IRepository<Customer>
     {
+        Customer Get(String s);
     }
 }
