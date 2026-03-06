@@ -23,8 +23,13 @@ namespace TourCompany.Models.Models
 
         public DateOnly? ExpiryDate { get; set; }
 
+<<<<<<< HEAD
+        //[Range(100, 999, ErrorMessage = "CSV must be 3 digits")]
+        public int CSV { get; set; }
+=======
         [Range(100, 999, ErrorMessage = "CSV must be 3 digits")]
         public int? CSV { get; set; }
+>>>>>>> f019fff7399e40ec9563383755cee9a983ae1d77
 
         public List<Booking>? Bookings { get; set; }
 

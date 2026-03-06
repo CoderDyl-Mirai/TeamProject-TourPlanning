@@ -237,18 +237,19 @@ namespace TourCompany.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+<<<<<<< HEAD
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+=======
                     b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+>>>>>>> f019fff7399e40ec9563383755cee9a983ae1d77
 
                     b.Property<int>("TicketAmount")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasPrecision(6, 2)
-                        .HasColumnType("decimal(6,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("TourId")
                         .HasColumnType("int");
@@ -260,6 +261,8 @@ namespace TourCompany.DataAccess.Migrations
                     b.HasIndex("TourId");
 
                     b.ToTable("Bookings");
+<<<<<<< HEAD
+=======
 
                     b.HasData(
                         new
@@ -280,6 +283,7 @@ namespace TourCompany.DataAccess.Migrations
                             TotalPrice = 68.00m,
                             TourId = 3
                         });
+>>>>>>> f019fff7399e40ec9563383755cee9a983ae1d77
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.BookingExtra", b =>
@@ -308,6 +312,46 @@ namespace TourCompany.DataAccess.Migrations
                     b.ToTable("BookingExtras");
                 });
 
+<<<<<<< HEAD
+            modelBuilder.Entity("TourCompany.Models.Models.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CSV")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreditCardNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("ExpiryDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+                });
+
+=======
+>>>>>>> f019fff7399e40ec9563383755cee9a983ae1d77
             modelBuilder.Entity("TourCompany.Models.Models.Extra", b =>
                 {
                     b.Property<int>("Id")
@@ -608,7 +652,7 @@ namespace TourCompany.DataAccess.Migrations
 
             modelBuilder.Entity("TourCompany.Models.Models.Booking", b =>
                 {
-                    b.HasOne("TourCompany.Models.Models.Customer", "Customer")
+                    b.HasOne("TourCompany.Models.Models.Customer", null)
                         .WithMany("Bookings")
                         .HasForeignKey("CustomerId");
 
@@ -618,15 +662,13 @@ namespace TourCompany.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
-
                     b.Navigation("Tour");
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.BookingExtra", b =>
                 {
                     b.HasOne("TourCompany.Models.Models.Booking", "Booking")
-                        .WithMany("BookingExtras")
+                        .WithMany()
                         .HasForeignKey("BookingId");
 
                     b.HasOne("TourCompany.Models.Models.Extra", "Extra")
@@ -649,9 +691,15 @@ namespace TourCompany.DataAccess.Migrations
                     b.Navigation("Tour");
                 });
 
+<<<<<<< HEAD
+            modelBuilder.Entity("TourCompany.Models.Models.Customer", b =>
+                {
+                    b.Navigation("Bookings");
+=======
             modelBuilder.Entity("TourCompany.Models.Models.Booking", b =>
                 {
                     b.Navigation("BookingExtras");
+>>>>>>> f019fff7399e40ec9563383755cee9a983ae1d77
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.Extra", b =>
