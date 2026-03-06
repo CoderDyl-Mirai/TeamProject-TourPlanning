@@ -12,7 +12,6 @@ namespace TourCompany.DataAccess.DataAccess
         {
 
         }
-
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Booking> Bookings { get; set; }
@@ -22,14 +21,16 @@ namespace TourCompany.DataAccess.DataAccess
         public DbSet<BookingExtra> BookingExtras { get; set; }
         public DbSet<Tour> Tours { get; set; }
 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Customer>()
                 .HasData(
-                new Customer { Id = 1, Firstname = "Joe", Lastname = "Bloggs", Email = "Joe_Bloggs@email.com", Phone = "0986493740", CreditCardNum = "7391630561936204", ExpiryDate = new DateOnly(2028, 2, 17), CSV = 481 },
-                new Customer { Id = 2, Firstname = "Jane", Lastname = "Smith", Email = "JaneSmith@email.com", Phone = "0867491503", CreditCardNum = "3905279573137936", ExpiryDate = new DateOnly(2032, 4, 3), CSV = 123 }
+                new Customer { Id = "guest1", Firstname = "Joe", Lastname = "Bloggs", Email = "Joe_Bloggs@email.com", PhoneNumber = "0986493740", CreditCardNum = "7391630561936204", ExpiryDate = new DateOnly(2028, 2, 17), CSV = 481 },
+                new Customer { Id = "guest2", Firstname = "Jane", Lastname = "Smith", Email = "JaneSmith@email.com", PhoneNumber = "0867491503", CreditCardNum = "3905279573137936", ExpiryDate = new DateOnly(2032, 4, 3), CSV = 123 }
             );
 
             modelBuilder.Entity<Tour>()
@@ -44,8 +45,8 @@ namespace TourCompany.DataAccess.DataAccess
 
             modelBuilder.Entity<Booking>()
                 .HasData(
-                new Booking { Id = 1, TicketAmount = 2, TotalPrice = 60.00m, Date = new DateTime(2026, 7, 21, 14, 45, 0, DateTimeKind.Utc), CustomerId = 1, TourId = 4 },
-                new Booking { Id = 2, TicketAmount = 4, TotalPrice = 68.00m, Date = new DateTime(2026, 6, 15, 15, 0, 0, DateTimeKind.Utc), CustomerId = 2, TourId = 3 }
+                new Booking { Id = 1, TicketAmount = 2, TotalPrice = 60.00m, Date = new DateTime(2026, 7, 21, 14, 45, 0, DateTimeKind.Utc), CustomerId = "guest1", TourId = 4 },
+                new Booking { Id = 2, TicketAmount = 4, TotalPrice = 68.00m, Date = new DateTime(2026, 6, 15, 15, 0, 0, DateTimeKind.Utc), CustomerId = "guest2", TourId = 3 }
             );
 
             modelBuilder.Entity<Extra>()

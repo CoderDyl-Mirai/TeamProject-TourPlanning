@@ -12,16 +12,14 @@ namespace TourCompany.Pages
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly TourDBContext _createCustomer;
-
 
         public Register Register {  get; set; }
 
-        public RegisterModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, TourDBContext createCustomer)
+
+        public RegisterModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _createCustomer = createCustomer;
         }
         public void OnGet()
         {
@@ -31,27 +29,19 @@ namespace TourCompany.Pages
         {
             if(ModelState.IsValid)
             {
-                var user = new IdentityUser()
+                var user = new Customer()
                 {
                     UserName = Register.EmailAddress,
-                    Email = Register.EmailAddress
+                    Firstname = Register.Firstname,
+                    Lastname = Register.Lastname,
+                    PhoneNumber = Register.Phone,
+                    Email = Register.EmailAddress,
+                    
                 };
 
                 var result = await _userManager.CreateAsync(user, Register.Password);
                 if (result.Succeeded)
-                {
-                    var customer = new Customer
-                    {
-                        IdentityUserId = user.Id,
-                        Firstname = Register.Firstname,
-                        Lastname = Register.Lastname,
-                        Phone = Register.Phone,
-                        Email = Register.EmailAddress
-                    };
-                    
-                    _createCustomer.Customers.Add(customer);
-                    await _createCustomer.SaveChangesAsync();
-                    
+                {                    
                     await _userManager.AddToRoleAsync(user, "Customer");
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToPage("Index");

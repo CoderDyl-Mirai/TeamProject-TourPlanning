@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using TourCompany.Models.Models;
 
 namespace TourCompany.Pages
 {
