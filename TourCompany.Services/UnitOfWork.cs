@@ -15,13 +15,15 @@ namespace TourCompany.Services
         public IExtraRepository ExtraRepository { get; private set; }
         public ITourRepository TourRepository { get; private set; }
 
+        public ICustomerRepository CustomerRepository { get; private set; }
+        
         public UnitOfWork(TourDBContext dbContext)
         {
             _dbContext = dbContext;
             BookingRepository = new BookingRepository(_dbContext);
             ExtraRepository = new ExtraRepository(_dbContext);
             TourRepository = new TourRepository(_dbContext);
-
+            CustomerRepository = new CustomerRepository(_dbContext);
         }
         public void Dispose()
         {

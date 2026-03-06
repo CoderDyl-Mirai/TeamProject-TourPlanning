@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TourCompany.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class _050326 : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,6 +32,12 @@ namespace TourCompany.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreditCardNum = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExpiryDate = table.Column<DateOnly>(type: "date", nullable: true),
+                    CSV = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -50,26 +56,6 @@ namespace TourCompany.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Customers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdentityUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lastname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreditCardNum = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExpiryDate = table.Column<DateOnly>(type: "date", nullable: true),
-                    CSV = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,18 +194,17 @@ namespace TourCompany.DataAccess.Migrations
                     TicketAmount = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(6,2)", precision: 6, scale: 2, nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     TourId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bookings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bookings_Customers_CustomerId",
+                        name: "FK_Bookings_AspNetUsers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Bookings_Tours_TourId",
                         column: x => x.TourId,
@@ -276,12 +261,12 @@ namespace TourCompany.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Customers",
-                columns: new[] { "Id", "CSV", "CreditCardNum", "Email", "ExpiryDate", "Firstname", "IdentityUserId", "Lastname", "Phone" },
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "CSV", "ConcurrencyStamp", "CreditCardNum", "Discriminator", "Email", "EmailConfirmed", "ExpiryDate", "Firstname", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 481, "7391630561936204", "Joe_Bloggs@email.com", new DateOnly(2028, 2, 17), "Joe", null, "Bloggs", "0986493740" },
-                    { 2, 123, "3905279573137936", "JaneSmith@email.com", new DateOnly(2032, 4, 3), "Jane", null, "Smith", "0867491503" }
+                    { "guest1", 0, 481, "eb2bf11c-c09e-430e-8c06-144025af4e55", "7391630561936204", "Customer", "Joe_Bloggs@email.com", false, new DateOnly(2028, 2, 17), "Joe", "Bloggs", false, null, null, null, null, "0986493740", false, "c0778afd-fb75-4164-b158-a0ef5186e607", false, null },
+                    { "guest2", 0, 123, "84389487-c72a-4a81-aaaf-dbc27621f8a6", "3905279573137936", "Customer", "JaneSmith@email.com", false, new DateOnly(2032, 4, 3), "Jane", "Smith", false, null, null, null, null, "0867491503", false, "b6f1acde-4801-4d71-8b8d-65ad3202b0f5", false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -302,8 +287,8 @@ namespace TourCompany.DataAccess.Migrations
                 columns: new[] { "Id", "CustomerId", "Date", "TicketAmount", "TotalPrice", "TourId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc), 2, 60.00m, 4 },
-                    { 2, 2, new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc), 4, 68.00m, 3 }
+                    { 1, "guest1", new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc), 2, 60.00m, 4 },
+                    { 2, "guest2", new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc), 4, 68.00m, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -407,16 +392,13 @@ namespace TourCompany.DataAccess.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Bookings");
 
             migrationBuilder.DropTable(
                 name: "Extras");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Tours");

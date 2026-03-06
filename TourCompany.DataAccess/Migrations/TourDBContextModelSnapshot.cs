@@ -86,6 +86,11 @@ namespace TourCompany.DataAccess.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -137,6 +142,10 @@ namespace TourCompany.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator().HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -228,8 +237,8 @@ namespace TourCompany.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -256,7 +265,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CustomerId = 1,
+                            CustomerId = "guest1",
                             Date = new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc),
                             TicketAmount = 2,
                             TotalPrice = 60.00m,
@@ -265,7 +274,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CustomerId = 2,
+                            CustomerId = "guest2",
                             Date = new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc),
                             TicketAmount = 4,
                             TotalPrice = 68.00m,
@@ -297,70 +306,6 @@ namespace TourCompany.DataAccess.Migrations
                     b.HasIndex("ExtraId");
 
                     b.ToTable("BookingExtras");
-                });
-
-            modelBuilder.Entity("TourCompany.Models.Models.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CSV")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreditCardNum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly?>("ExpiryDate")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Firstname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lastname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CSV = 481,
-                            CreditCardNum = "7391630561936204",
-                            Email = "Joe_Bloggs@email.com",
-                            ExpiryDate = new DateOnly(2028, 2, 17),
-                            Firstname = "Joe",
-                            Lastname = "Bloggs",
-                            Phone = "0986493740"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CSV = 123,
-                            CreditCardNum = "3905279573137936",
-                            Email = "JaneSmith@email.com",
-                            ExpiryDate = new DateOnly(2032, 4, 3),
-                            Firstname = "Jane",
-                            Lastname = "Smith",
-                            Phone = "0867491503"
-                        });
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.Extra", b =>
@@ -548,6 +493,68 @@ namespace TourCompany.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("TourCompany.Models.Models.Customer", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<int?>("CSV")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreditCardNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly?>("ExpiryDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Customer");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "guest1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "eb2bf11c-c09e-430e-8c06-144025af4e55",
+                            Email = "Joe_Bloggs@email.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumber = "0986493740",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c0778afd-fb75-4164-b158-a0ef5186e607",
+                            TwoFactorEnabled = false,
+                            CSV = 481,
+                            CreditCardNum = "7391630561936204",
+                            ExpiryDate = new DateOnly(2028, 2, 17),
+                            Firstname = "Joe",
+                            Lastname = "Bloggs"
+                        },
+                        new
+                        {
+                            Id = "guest2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "84389487-c72a-4a81-aaaf-dbc27621f8a6",
+                            Email = "JaneSmith@email.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumber = "0867491503",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "b6f1acde-4801-4d71-8b8d-65ad3202b0f5",
+                            TwoFactorEnabled = false,
+                            CSV = 123,
+                            CreditCardNum = "3905279573137936",
+                            ExpiryDate = new DateOnly(2032, 4, 3),
+                            Firstname = "Jane",
+                            Lastname = "Smith"
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -603,9 +610,7 @@ namespace TourCompany.DataAccess.Migrations
                 {
                     b.HasOne("TourCompany.Models.Models.Customer", "Customer")
                         .WithMany("Bookings")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("TourCompany.Models.Models.Tour", "Tour")
                         .WithMany("Bookings")
@@ -649,11 +654,6 @@ namespace TourCompany.DataAccess.Migrations
                     b.Navigation("BookingExtras");
                 });
 
-            modelBuilder.Entity("TourCompany.Models.Models.Customer", b =>
-                {
-                    b.Navigation("Bookings");
-                });
-
             modelBuilder.Entity("TourCompany.Models.Models.Extra", b =>
                 {
                     b.Navigation("BookingExtra");
@@ -664,6 +664,11 @@ namespace TourCompany.DataAccess.Migrations
                     b.Navigation("Bookings");
 
                     b.Navigation("Extras");
+                });
+
+            modelBuilder.Entity("TourCompany.Models.Models.Customer", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

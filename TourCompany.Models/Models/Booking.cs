@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +22,11 @@ namespace TourCompany.Models.Models
 
         public DateTime Date { get; set; }
 
-        public int CustomerId { get; set; }
+        public string? CustomerId { get; set; }
         public Customer? Customer { get; set; }
 
         public int TourId { get; set; }
         public Tour? Tour { get; set; }
-
         public List<BookingExtra>? BookingExtras { get; set; }
     }
 }
