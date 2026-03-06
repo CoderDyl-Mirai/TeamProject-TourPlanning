@@ -16,7 +16,6 @@ namespace TourCompany.Services
         public ITourRepository TourRepository { get; private set; }
         public ICustomerRepository CustomerRepository { get; private set; }
 
-        public ICustomerRepository CustomerRepository { get; private set; }
         
         public UnitOfWork(TourDBContext dbContext)
         {
@@ -24,11 +23,6 @@ namespace TourCompany.Services
             BookingRepository = new BookingRepository(_dbContext);
             ExtraRepository = new ExtraRepository(_dbContext);
             TourRepository = new TourRepository(_dbContext);
-            CustomerRepository = new CustomerRepository(_dbContext);
-<<<<<<< HEAD
-
-=======
->>>>>>> f019fff7399e40ec9563383755cee9a983ae1d77
         }
         public void Dispose()
         {
