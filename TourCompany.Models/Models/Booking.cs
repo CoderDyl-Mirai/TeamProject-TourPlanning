@@ -13,19 +13,7 @@ namespace TourCompany.Models.Models
     public class Booking
     {
         public int Id { get; set; }
-<<<<<<< HEAD
-        public int TourId { get; set; }
-        [ForeignKey("TourId")]
-        [ValidateNever]
-        public Tour Tour { get; set; }
-        public int TicketAmount {  get; set; }
-        public decimal TotalPrice { get; set; }
-        //public string CustomerId { get; set; }
-        //[ForeignKey("CustomerId")]
-        //[ValidateNever]
 
-        //public Customer Customer { get; set; }
-=======
         [Required]
         public int TicketAmount { get; set; }
 
@@ -39,8 +27,10 @@ namespace TourCompany.Models.Models
         public Customer? Customer { get; set; }
 
         public int TourId { get; set; }
+
+        [ValidateNever]
         public Tour? Tour { get; set; }
+
         public List<BookingExtra>? BookingExtras { get; set; }
->>>>>>> f019fff7399e40ec9563383755cee9a983ae1d77
     }
 }
