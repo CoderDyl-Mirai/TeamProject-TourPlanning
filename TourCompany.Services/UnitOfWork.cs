@@ -23,6 +23,7 @@ namespace TourCompany.Services
             BookingRepository = new BookingRepository(_dbContext);
             ExtraRepository = new ExtraRepository(_dbContext);
             TourRepository = new TourRepository(_dbContext);
+            CustomerRepository = new CustomerRepository(_dbContext);
         }
         public void Dispose()
         {

@@ -11,39 +11,39 @@ namespace TourCompany.Pages.Admin.Customers
     [BindProperties]
     public class DeleteModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IUnitOfWork _unitOfWork;
 
 
-        public DeleteModel(UserManager<IdentityUser> userManager)
+        public DeleteModel(IUnitOfWork unitOfWork)
         {
-            _userManager = userManager;
+            _unitOfWork = unitOfWork;
         }
 
-        public IdentityUser Customer { get; set; }
+        public Customer Customer { get; set; }
 
 
-        public async Task<IActionResult> OnGet(string id)
+        public void OnGet(string id)
         {
-            Customer = await _userManager.FindByIdAsync(id);
-
-            if(Customer == null)
-            {
-                return NotFound();
-            }
-
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPost(string id)
-        {
-            Customer = await _userManager.FindByIdAsync(id);
+            Customer = _unitOfWork.CustomerRepository.Get(id);
 
             if (Customer == null)
             {
+                NotFound();
+            }
+
+        }
+
+        public IActionResult OnPost()
+        {
+            var customerFromDB = _unitOfWork.CustomerRepository.Get(Customer.Id);
+
+            if (customerFromDB == null)
+            {
                 return NotFound();
             }
 
-            await _userManager.DeleteAsync(Customer);
+            _unitOfWork.CustomerRepository.Delete(customerFromDB);
+            _unitOfWork.Save();
 
             return RedirectToPage("Index");
         }
