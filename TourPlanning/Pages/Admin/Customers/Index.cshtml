@@ -2,24 +2,42 @@
 @model TourCompany.Pages.Admin.Customers.IndexModel
 @{
 }
-<h3 class="text-primary">Customers</h3>
+<div class="container p-3">
+	<div class="row pt-4">
+		<div class="col-6">
+			<h3 class="text-primary">Customers</h3>
+		</div>
+	</div>
+
+</div>
 
 <br />
 <br />
 <br />
 
-<table>
+<div style="padding-bottom: 80px;">
+	<table class="table table-bordered table-striped">
 	<thead>
 		<tr>
+			<th>Customer ID</th>
 			<th>Name</th>
+			<th>Email</th>
+			<th>Phone</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach (var obj in Model.Customers)
 		{
 			<tr>
-				<td width="50%">@(obj.Firstname + " " +obj.Lastname)</td>
+				<td width="20%">@obj.Id.ToString().Substring(0,6)</td>
+				<td width="30%">@(obj.Firstname + " " +obj.Lastname)</td>
+				<td width="30%">@obj.Email</td>
+				<td width="20%">@obj.PhoneNumber</td>
+				<td>
+					<a asp-page="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">Delete</a>
+				</td>
 			</tr>
 		}
 	</tbody>
 </table>
+</div>

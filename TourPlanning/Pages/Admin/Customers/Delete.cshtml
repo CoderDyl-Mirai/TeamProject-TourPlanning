@@ -1,0 +1,44 @@
+﻿@page
+@model TourCompany.Pages.Admin.Customers.DeleteModel
+@{
+}
+<form method="post" enctype="multipart/form-data">
+	<input hidden asp-for="Customer.Id" />
+	<div class="border p-3 mt-4 mb-5">
+		<div class="row pb-2">
+			<div class="col-9">
+
+				<h2 class="text-primary pl-3">Delete Customer</h2>
+				<div class="mb-3">
+					<label asp-for="Customer.Id"></label>
+					<input asp-for="Customer.Id" class="form-control" readonly />
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.Firstname"></label>
+					<input asp-for="Customer.Firstname" class="form-control" readonly />
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.Lastname"></label>
+					<input asp-for="Customer.Lastname" class="form-control" readonly />
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.Email"></label>
+					<input asp-for="Customer.Email" class="form-control" readonly />
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.PhoneNumber"></label>
+					<input asp-for="Customer.PhoneNumber" class="form-control" readonly />
+				</div>
+
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary">Delete</button>
+		<a asp-page="Index" class="btn btn-secondary">Back to Index</a>
+	</div>
+
+</form>
+@section Scripts {
+	@{
+		<partial name="_validationScriptsPartial"></partial>
+	}
+}
