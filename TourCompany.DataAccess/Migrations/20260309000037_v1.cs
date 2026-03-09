@@ -265,8 +265,8 @@ namespace TourCompany.DataAccess.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "CSV", "ConcurrencyStamp", "CreditCardNum", "Discriminator", "Email", "EmailConfirmed", "ExpiryDate", "Firstname", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "guest1", 0, 481, "c8a35fe2-1ea5-4d7d-bb93-90ba81fd301e", "7391630561936204", "Customer", "Joe_Bloggs@email.com", false, new DateOnly(2028, 2, 17), "Joe", "Bloggs", false, null, null, null, null, "0986493740", false, "4fa01379-04ae-4fff-b163-a0ac3a3aa8ba", false, null },
-                    { "guest2", 0, 123, "462c5791-d884-4d2a-9e43-60ac9abb144a", "3905279573137936", "Customer", "JaneSmith@email.com", false, new DateOnly(2032, 4, 3), "Jane", "Smith", false, null, null, null, null, "0867491503", false, "01d3a9aa-2cfe-4491-9d90-7ac3470470ca", false, null }
+                    { "guest1", 0, 481, "896bef1a-343a-4960-9508-102cea7eabf3", "7391630561936204", "Customer", "Joe_Bloggs@email.com", false, new DateOnly(2028, 2, 17), "Joe", "Bloggs", false, null, null, null, null, "0986493740", false, "38b7e938-eff3-4527-8d77-71940cdd72d4", false, null },
+                    { "guest2", 0, 123, "a136ebb6-2067-405a-90c5-e67f176b5157", "3905279573137936", "Customer", "JaneSmith@email.com", false, new DateOnly(2032, 4, 3), "Jane", "Smith", false, null, null, null, null, "0867491503", false, "155b6daf-e5ed-4163-8963-c238cf7966fd", false, null }
                 });
 
             migrationBuilder.InsertData(

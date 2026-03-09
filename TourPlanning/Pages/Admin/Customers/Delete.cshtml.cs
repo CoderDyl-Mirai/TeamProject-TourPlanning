@@ -36,10 +36,16 @@ namespace TourCompany.Pages.Admin.Customers
         public IActionResult OnPost()
         {
             var customerFromDB = _unitOfWork.CustomerRepository.Get(Customer.Id);
-
+            var bookings = _unitOfWork.BookingRepository.CustomerBooking(customerFromDB.Id);
+            
             if (customerFromDB == null)
             {
                 return NotFound();
+            }
+
+            foreach(var booking in bookings)
+            {
+                _unitOfWork.BookingRepository.Delete(booking);
             }
 
             _unitOfWork.CustomerRepository.Delete(customerFromDB);
