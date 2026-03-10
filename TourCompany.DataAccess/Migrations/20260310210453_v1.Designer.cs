@@ -12,7 +12,7 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    [Migration("20260309000037_v1")]
+    [Migration("20260310210453_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -524,13 +524,13 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = "guest1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "896bef1a-343a-4960-9508-102cea7eabf3",
+                            ConcurrencyStamp = "664589b5-9324-4ba3-893c-80246b2372fa",
                             Email = "Joe_Bloggs@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "0986493740",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "38b7e938-eff3-4527-8d77-71940cdd72d4",
+                            SecurityStamp = "499e0f17-954b-46db-97bf-b98adb9bec83",
                             TwoFactorEnabled = false,
                             CSV = 481,
                             CreditCardNum = "7391630561936204",
@@ -542,13 +542,13 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = "guest2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a136ebb6-2067-405a-90c5-e67f176b5157",
+                            ConcurrencyStamp = "f1870b8f-b255-4be2-a9cd-bd070386de7f",
                             Email = "JaneSmith@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "0867491503",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "155b6daf-e5ed-4163-8963-c238cf7966fd",
+                            SecurityStamp = "5d7e753f-1e51-45e4-b6ce-33f58db595c4",
                             TwoFactorEnabled = false,
                             CSV = 123,
                             CreditCardNum = "3905279573137936",
