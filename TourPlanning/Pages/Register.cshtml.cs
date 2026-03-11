@@ -41,7 +41,7 @@ namespace TourCompany.Pages
 
                 var result = await _userManager.CreateAsync(user, Register.Password);
                 if (result.Succeeded)
-                {                    
+                {  
                     await _userManager.AddToRoleAsync(user, "Customer");
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToPage("Index");
