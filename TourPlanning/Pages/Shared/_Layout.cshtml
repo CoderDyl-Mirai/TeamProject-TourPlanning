@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/bootstrapLux.css" asp-append-version="true" />
-
     <link rel="stylesheet" href="~/TourCompany.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -47,12 +46,19 @@
                                 </li>
                             </ul>
                         }
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Menu
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item text-bg-dark" href="/Customers/Home/Profile">My Account</a>
+                                </li>
+                            </ul>
 
-                        <ul class="navbar-nav d-flex flex-grow-1 justify-content-end">
-                            <li class="nav-item">
-                                <a class="btn btn-outline-secondary" asp-area="" asp-page="/Logout">Logout</a>
-                            </li>
-                        </ul>
+                            <a class="btn btn-outline-secondary" asp-area="" asp-page="/Logout">Logout</a>
+                        </div>
+
                     }
                     else
                     {
