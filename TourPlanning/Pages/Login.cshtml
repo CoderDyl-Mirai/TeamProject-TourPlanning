@@ -2,6 +2,7 @@
 @model TourCompany.Pages.LoginModel
 @{
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <form method="post">
 	<div class="border p-3 mt-4">
@@ -26,9 +27,9 @@
 			<input type="checkbox" asp-for="Login.RememberMe" class="form-checked" />
 			<span asp-validation-for="Login.RememberMe" class="text-danger"></span>
 		</div>
+		<a asp-page="Register">Don't Have An Account: Sign Up</a><br />
 
 		<button type="submit" class="btn btn-primary">Login</button>
-		<a asp-page="Index" button type="submit" class="btn btn-outline-secondary">Home</a>
 	</div>
 </form>
 
@@ -37,4 +38,9 @@
 		<partial name="_validationScriptsPartial" />
 	}
 }
+
+<script>
+	$("#Login").html("");
+</script>
+
 
