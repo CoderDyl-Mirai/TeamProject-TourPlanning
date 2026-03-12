@@ -10,26 +10,44 @@
 
 				<h2 class="text-primary pl-3">My Account</h2>
 				<div class="mb-3">
-					<label asp-for="Customer.Firstname"></label>
-					<input asp-for="Customer.Firstname" class="form-control"/>
+					<label asp-for="Customer.Email">Email:</label>
+					<input asp-for="Customer.Email" class="form-control" readonly/>
 				</div>
 				<div class="mb-3">
-					<label asp-for="Customer.Lastname"></label>
+					<label asp-for="Customer.Firstname">Firstname:</label>
+					<input asp-for="Customer.Firstname" class="form-control" />
+					<span asp-validation-for="Customer.Firstname" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.Lastname">Lastname:</label>
 					<input asp-for="Customer.Lastname" class="form-control" />
+					<span asp-validation-for="Customer.Lastname" class="text-danger"></span>
 				</div>
 				<div class="mb-3">
-					<label asp-for="Customer.Email"></label>
-					<input asp-for="Customer.Email" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label asp-for="Customer.PhoneNumber"></label>
+					<label asp-for="Customer.PhoneNumber">Phonenumber:</label>
 					<input asp-for="Customer.PhoneNumber" class="form-control" />
+					<span asp-validation-for="Customer.PhoneNumber" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.CreditCardNum">Card Number:</label>
+					<input asp-for="Customer.CreditCardNum" class="form-control" />
+					<span asp-validation-for="Customer.CreditCardNum" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.ExpiryDate">Expiry Date:</label>
+					<input asp-for="Customer.ExpiryDate" class="form-control" />
+					<span asp-validation-for="Customer.ExpiryDate" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.CSV">CSV:</label>
+					<input asp-for="Customer.CSV" class="form-control" />
+					<span asp-validation-for="Customer.CSV" class="text-danger"></span>
 				</div>
 
 			</div>
 		</div>
 		<button type="submit" class="btn btn-primary">Edit</button>
-		<a asp-page="Index" class="btn btn-secondary">Back to Index</a>
+		<a asp-page="Index" class="btn btn-secondary">Back</a>
 	</div>
 
 </form>

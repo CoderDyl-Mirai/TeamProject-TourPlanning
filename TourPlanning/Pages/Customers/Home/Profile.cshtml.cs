@@ -26,17 +26,23 @@ namespace TourCompany.Pages.Customers.Home
             Customer = _unitOfWork.CustomerRepository.Get(userid);
         }
         public IActionResult OnPost()
-        {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            var userid = claim.Value;
-
-            Customer = _unitOfWork.CustomerRepository.Get(userid);
-
-
+        { 
             if (ModelState.IsValid)
             {
-                _unitOfWork.CustomerRepository.Update(Customer);
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                var userid = claim.Value;
+
+                var customer = _unitOfWork.CustomerRepository.Get(userid);
+
+                customer.Firstname = Customer.Firstname;
+                customer.Lastname = Customer.Lastname;
+                customer.PhoneNumber = Customer.PhoneNumber;
+                customer.CreditCardNum = Customer.CreditCardNum;
+                customer.ExpiryDate = Customer.ExpiryDate;
+                customer.CSV = Customer.CSV;
+
+                _unitOfWork.CustomerRepository.Update(customer);
                 _unitOfWork.Save();
             }
             return RedirectToPage("Index");
