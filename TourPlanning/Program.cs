@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using TourCompany.DataAccess.DataAccess;
 using TourCompany.Pages;
+using TourCompany.Pages.PageViewModels;
 using TourCompany.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,8 @@ builder.Services.AddDbContext<TourDBContext>(options => options.UseSqlServer(
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<TourDBContext>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -35,6 +39,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+string key = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
+StripeConfiguration.ApiKey = key;
 await app.CreateRolesAsync(builder.Configuration);
 
 app.UseAuthentication();
