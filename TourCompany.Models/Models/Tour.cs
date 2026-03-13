@@ -25,8 +25,6 @@ namespace TourCompany.Models.Models
 
         public int Duration { get; set; }
 
-        public DateTime Date { get; set; }
-
         public string? Location { get; set; }
         public List<Booking>? Bookings { get; set; }
         public List<Extra>? Extras { get; set; }

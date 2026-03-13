@@ -25,7 +25,6 @@ namespace TourCompany.DataAccess.Repository
             tourFromDB.MaxCapacity = tour.MaxCapacity;
             tourFromDB.MinCapacity = tour.MinCapacity;
             tourFromDB.Duration = tour.Duration;
-            tourFromDB.Date = tour.Date;
             tourFromDB.Location = tour.Location;
 
 
