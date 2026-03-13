@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/bootstrapLux.css" asp-append-version="true" />
-
     <link rel="stylesheet" href="~/TourCompany.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -33,26 +32,36 @@
                     {
                         @if (User.IsInRole("Admin"))
                         {
-                            <ul class="navbar-nav flex-grow-1">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                                       role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="/Admin/Customers/Index">Customer</a>
-                                            <a class="dropdown-item" href="/Admin/Bookings/Index">Bookings</a>
-                                            <a class="dropdown-item" href="/Admin/Tours/Index">Tours</a>
-                                            <a class="dropdown-item" href="/Admin/Extras/Index">Extras</a>
-                                            <a class="dropdown-item" href="/Admin/BookingExtras/Index">BookingExtras</a>
-                                        </div>
-                                </li>
-                            </ul>
+                            <div class="dropdown d-flex flex-row mb-3">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    AdminMenu
+                                </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item text-bg-dark" href="/Admin/Customers/Index">Customer</a></li>
+                                            <li><a class="dropdown-item text-bg-dark" href="/Admin/Bookings/Index">Bookings</a></li>
+                                            <li><a class="dropdown-item text-bg-dark" href="/Admin/Tours/Index">Tours</a></li>
+                                            <li><a class="dropdown-item text-bg-dark" href="/Admin/Extras/Index">Extras</a></li>
+                                            <li><a class="dropdown-item text-bg-dark" href="/Admin/BookingExtras/Index">BookingExtras</a></li>
+                                        </ul>
+
+                                <a class="btn btn-outline-secondary" asp-area="" asp-page="/Logout">Logout</a>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="dropdown d-flex flex-row mb-3">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Menu
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item text-bg-dark" href="/Customers/Home/Profile">My Account</a></li>
+                                </ul>
+                                <a class="btn btn-outline-secondary" asp-area="" asp-page="/Logout">Logout</a>
+                            </div>
+
                         }
 
-                        <ul class="navbar-nav d-flex flex-grow-1 justify-content-end">
-                            <li class="nav-item">
-                                <a class="btn btn-outline-secondary" asp-area="" asp-page="/Logout">Logout</a>
-                            </li>
-                        </ul>
                     }
                     else
                     {

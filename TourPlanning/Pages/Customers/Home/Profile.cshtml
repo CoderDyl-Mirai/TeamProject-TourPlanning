@@ -1,0 +1,58 @@
+﻿@page
+@model TourCompany.Pages.Customers.Home.ProfileModel
+@{
+}
+<form method="post" enctype="multipart/form-data">
+	<input hidden asp-for="Customer.Id" />
+	<div class="border p-3 mt-4 mb-5">
+		<div class="row pb-2">
+			<div class="col-9">
+
+				<h2 class="text-primary pl-3">My Account</h2>
+				<div class="mb-3">
+					<label asp-for="Customer.Email">Email:</label>
+					<input asp-for="Customer.Email" class="form-control" readonly/>
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.Firstname">Firstname:</label>
+					<input asp-for="Customer.Firstname" class="form-control" />
+					<span asp-validation-for="Customer.Firstname" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.Lastname">Lastname:</label>
+					<input asp-for="Customer.Lastname" class="form-control" />
+					<span asp-validation-for="Customer.Lastname" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.PhoneNumber">Phonenumber:</label>
+					<input asp-for="Customer.PhoneNumber" class="form-control" />
+					<span asp-validation-for="Customer.PhoneNumber" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.CreditCardNum">Card Number:</label>
+					<input asp-for="Customer.CreditCardNum" class="form-control" />
+					<span asp-validation-for="Customer.CreditCardNum" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.ExpiryDate">Expiry Date:</label>
+					<input asp-for="Customer.ExpiryDate" class="form-control" />
+					<span asp-validation-for="Customer.ExpiryDate" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="Customer.CSV">CSV:</label>
+					<input asp-for="Customer.CSV" class="form-control" />
+					<span asp-validation-for="Customer.CSV" class="text-danger"></span>
+				</div>
+
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary">Edit</button>
+		<a asp-page="Index" class="btn btn-secondary">Back</a>
+	</div>
+
+</form>
+@section Scripts {
+	@{
+		<partial name="_validationScriptsPartial"></partial>
+	}
+}
