@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TourCompany.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class v1 : Migration
+    public partial class BookingE : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -265,8 +265,8 @@ namespace TourCompany.DataAccess.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "CSV", "ConcurrencyStamp", "CreditCardNum", "Discriminator", "Email", "EmailConfirmed", "ExpiryDate", "Firstname", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "guest1", 0, 481, "587c8713-0bad-499f-b350-aceb99d12c17", "7391630561936204", "Customer", "Joe_Bloggs@email.com", false, new DateOnly(2028, 2, 17), "Joe", "Bloggs", false, null, null, null, null, "0986493740", false, "a09d29d2-cdd1-4270-ae75-efc947eb6ab9", false, null },
-                    { "guest2", 0, 123, "b9f8f99c-5191-4552-8d55-3f35bf2c2295", "3905279573137936", "Customer", "JaneSmith@email.com", false, new DateOnly(2032, 4, 3), "Jane", "Smith", false, null, null, null, null, "0867491503", false, "60020341-ed9d-4b1b-aeae-6cdc7a6fdfd7", false, null }
+                    { "guest1", 0, 481, "619ee4c3-05fa-40d3-81dd-609d9fbdd548", "7391630561936204", "Customer", "Joe_Bloggs@email.com", false, new DateOnly(2028, 2, 17), "Joe", "Bloggs", false, null, null, null, null, "0986493740", false, "63463f54-7154-41c4-ae33-2ec9c2890fda", false, null },
+                    { "guest2", 0, 123, "8d81b9fb-3554-4807-b7b7-71fdb1799ebd", "3905279573137936", "Customer", "JaneSmith@email.com", false, new DateOnly(2032, 4, 3), "Jane", "Smith", false, null, null, null, null, "0867491503", false, "64d38cce-7232-42c0-8857-95376169def0", false, null }
                 });
 
             migrationBuilder.InsertData(

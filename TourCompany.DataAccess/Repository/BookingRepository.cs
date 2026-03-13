@@ -22,7 +22,9 @@ namespace TourCompany.DataAccess.Repository
              var bookingList = _dBContext.Bookings.Where(b => b.CustomerId == id).ToList();
              return bookingList;
         }
-                
-   
+
+
+
+
     }
 }

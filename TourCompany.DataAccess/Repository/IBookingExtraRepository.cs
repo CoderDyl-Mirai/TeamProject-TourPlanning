@@ -7,10 +7,7 @@ using TourCompany.Models.Models;
 
 namespace TourCompany.DataAccess.Repository
 {
-    public interface IExtraRepository : IRepository<Extra>
+    public interface IBookingExtraRepository : IRepository<BookingExtra>
     {
-        public void Update(Extra extra);
-        public List<Extra> GetExtrasForTour(int id);
-
     }
 }
