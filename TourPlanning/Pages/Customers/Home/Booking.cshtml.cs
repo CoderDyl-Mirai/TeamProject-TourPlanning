@@ -19,6 +19,7 @@ namespace TourCompany.Pages.Customers.Home
         public Booking Booking { get; set; }
         [BindProperty]
         public Customer Customer { get; set; }
+        public BookingExtra BookingExtra { get; set; }
         public Tour Tour { get; set; }
         public IEnumerable<Extra> Extras;
         [BindProperty]
@@ -35,28 +36,31 @@ namespace TourCompany.Pages.Customers.Home
                 TotalPrice = 0,
                 TicketAmount = 1,
                 Tour = _unitOfWork.TourRepository.Get(id),
-                TourId = id
-            };
-
-            Customer = new()
-            {
-                //ApplicationUserId = claim.Value,
-                Firstname = "",
-                Lastname = "",
-                Email = "",
+                TourId = id,
+                Date = DateTime.Now
             };
             Extras = _unitOfWork.ExtraRepository.GetExtrasForTour(id);
         }
         public IActionResult OnPost()
         {
-            Console.WriteLine(choosenExtra);
             if (ModelState.IsValid)
             {                
                 _unitOfWork.BookingRepository.Add(Booking);
-                _unitOfWork.CustomerRepository.Add(Customer);
+
                 _unitOfWork.Save();
-                
-                
+                foreach (var extra in choosenExtra)
+                {
+                    BookingExtra = new BookingExtra()
+                    {
+                        Qty = Booking.TicketAmount,
+                        ExtraId = extra,
+                        BookingId = Booking.Id
+                    };
+                    _unitOfWork.BookingExtraRepository.Add(BookingExtra);
+                    _unitOfWork.Save();
+                }
+
+
                 return RedirectToPage("Index");
             }
             return Page();

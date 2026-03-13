@@ -43,7 +43,8 @@
 				<input class="form-check-input"
 					   type="checkbox"
 					   name="choosenExtra" 
-					   value=@extra.Price
+					   value=@extra.Id
+					   data-price=@extra.Price
 					   id="@extra.Id" />
 				<label class="form-check-label" for="@extra.Id">
 					@extra.Name €@extra.Price
@@ -70,7 +71,7 @@
 		let totalPrice = @Model.Booking.Tour.Price * $("#ticketAmount").val();
 
 		$('input[type="checkbox"]:checked').each(function () {
-			totalPrice += parseFloat($(this).val())* $("#ticketAmount").val();
+			totalPrice += parseFloat($(this).data("price"))* $("#ticketAmount").val();
 		});
 
 		$("#totalPrice").val(totalPrice);
