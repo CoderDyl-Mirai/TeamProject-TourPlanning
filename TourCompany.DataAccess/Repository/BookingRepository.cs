@@ -23,6 +23,19 @@ namespace TourCompany.DataAccess.Repository
              return bookingList;
         }
 
+        public object GetBookingsOfTour(int id)
+        {
+            var bookingOfTour = _dBContext.Bookings
+                .Where(b => b.TourId == id)
+                .Select(b => new
+            {
+                b.Date,
+                b.TicketAmount
+            })
+            .ToList();
+            return bookingOfTour;
+        }
+
 
 
 

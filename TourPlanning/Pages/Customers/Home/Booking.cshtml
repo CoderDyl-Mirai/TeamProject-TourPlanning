@@ -6,6 +6,7 @@
 
 <form method="post">
         <input asp-for="Booking.TourId" hidden/>
+		<input asp-for="Booking.CustomerId" hidden/>
     <!--<input asp-for="Booking.ApplicationUserId" hidden />-->
 	<div class="border p-3 mt-4 mb-5">
 		<div class="row pb-2">
@@ -37,9 +38,9 @@
 				   type="datetime-local"
 				   id="date"
 				   class="form-control"
-				   min="2026-03-01T09:00"
-				   max="2030-12-31T18:00"
-				   step="3600"/>
+				   min="@DateTime.Now.AddHours(1).AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second).ToString("yyyy-MM-ddTHH:mm")" 
+				   max="@DateTime.Now.AddMonths(6).AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second).ToString("yyyy-MM-ddTHH:mm")"
+				   step="3600" />
 			<!-- step="3600" = 1 hour intervals -->
 			<span asp-validation-for="@Model.Booking.Date" class="text-danger"></span>
 		</div>
@@ -75,12 +76,13 @@
 
 		
 
-		<button type="submit" class="btn btn-primary">Create</button>
+		<button type="submit" id ="submit" class="btn btn-primary">Create</button>
 		<a asp-page="Index" class="btn btn-secondary">Back</a>
 
 	</div>
     </form>
 	<script>
+
 			function calculateTotal() {
 		let totalPrice = @Model.Booking.Tour.Price * $("#ticketAmount").val();
 
@@ -89,26 +91,74 @@
 		});
 
 		$("#totalPrice").val(totalPrice);
+
+		currentCap = 0
+		console.log(bookings)
+		bookings.forEach(function(booking){
+			//console.log($("#date").val())
+			date = booking.date.substring(0,16)
+			//console.log(date)
+			if(date === $("#date").val())
+			{
+				currentCap += booking.ticketAmount
+			}
+		})
+		console.log(currentCap+Number($("#ticketAmount").val()))
+		if(currentCap+Number($("#ticketAmount").val())>@Model.Booking.Tour.MaxCapacity)
+		{
+			$("#submit").prop("disabled",true);
+		}
+		else{
+			$("#submit").prop("disabled",false);
+		}
 	}
 
 	$("#ticketAmount").on("change", calculateTotal);
 	$(".form-check-input").on("click", calculateTotal);
-		var $dateInput = $('#date');
 
-		function snapToHour(value) {
-			if (!value) return value;
-			var parts = value.split('T');
-			var datePart = parts[0];
-			var hour = parts[1].split(':')[0];
-			return datePart + 'T' + hour.padStart(2, '0') + ':00';
-		}
+	
+	var bookings = @Html.Raw(Json.Serialize(Model.BookingsOfTour));
+
+
+	var $dateInput = $('#date');
+
+	function snapToHour(value) {
+		if (!value) return value;
+		var parts = value.split('T');
+		var datePart = parts[0];
+		var hour = parts[1].split(':')[0];
+		return datePart + 'T' + hour.padStart(2, '0') + ':00';
+	}
 
 		// Snap on page load
-		$dateInput.val(snapToHour($dateInput.val()));
+	$dateInput.val(snapToHour($dateInput.val()));
 
 		// Snap whenever user changes the input
-		$dateInput.on('input change', function() {
-			$(this).val(snapToHour($(this).val()));
-		});
+	$dateInput.on('input change', function() {
+		$(this).val(snapToHour($(this).val()));
 
+		currentCap = 0
+		console.log(bookings)
+		bookings.forEach(function(booking){
+			//console.log($("#date").val())
+			date = booking.date.substring(0,16)
+			//console.log(date)
+			if(date === $("#date").val())
+			{
+				currentCap += booking.ticketAmount
+			}
+		})
+		console.log(currentCap)
+		console.log(currentCap+Number($("#ticketAmount").val()))
+
+
+		if(currentCap+Number($("#ticketAmount").val())>@Model.Booking.Tour.MaxCapacity)
+		{
+			$("#submit").prop("disabled",true);
+		}
+		else{
+			$("#submit").prop("disabled",false);
+		}
+	});
+	
 	</script>
