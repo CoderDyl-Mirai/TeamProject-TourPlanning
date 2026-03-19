@@ -21,18 +21,20 @@ namespace TourCompany.Pages.Customers.Home
         public Customer Customer { get; set; }
         public BookingExtra BookingExtra { get; set; }
         public Tour Tour { get; set; }
+
+        public object BookingsOfTour;
         public IEnumerable<Extra> Extras;
         [BindProperty]
 
         public IEnumerable<int> choosenExtra { get; set; }
         public void OnGet(int id)
         {
-            //var claimsIdentity = (ClaimsIdentity)User.Identity;
-            //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             
             Booking = new()
             {
-                //ApplicationUserId = claim.Value,
+                CustomerId = claim.Value,
                 TotalPrice = 0,
                 TicketAmount = 1,
                 Tour = _unitOfWork.TourRepository.Get(id),
@@ -40,6 +42,9 @@ namespace TourCompany.Pages.Customers.Home
                 Date = DateTime.Now
             };
             Extras = _unitOfWork.ExtraRepository.GetExtrasForTour(id);
+
+            BookingsOfTour = _unitOfWork.BookingRepository.GetBookingsOfTour(id);
+
         }
         public IActionResult OnPost()
         {
