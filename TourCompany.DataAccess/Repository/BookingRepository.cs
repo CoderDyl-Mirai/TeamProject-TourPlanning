@@ -36,6 +36,18 @@ namespace TourCompany.DataAccess.Repository
             return bookingOfTour;
         }
 
+        public List<Booking> BookingDetails(string id)
+        {
+            var bookingDetails = _dBContext.Bookings.Where(b => b.CustomerId == id)
+                .Include(b => b.Tour)
+                .Include(b => b.BookingExtras)
+                .ThenInclude(e => e.Extra)
+                .OrderByDescending(b => b.Date)
+                .ToList();
+            return bookingDetails;
+        }
+
+
 
 
 
