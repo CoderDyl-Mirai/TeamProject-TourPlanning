@@ -17,8 +17,6 @@ namespace TourCompany.Pages.Customers.Home
 
         [BindProperty]
         public Booking Booking { get; set; }
-        [BindProperty]
-        public Customer Customer { get; set; }
         public BookingExtra BookingExtra { get; set; }
         public Tour Tour { get; set; }
 
