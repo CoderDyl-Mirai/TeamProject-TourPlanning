@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TourCompany.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class v1 : Migration
+    public partial class _200336 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -265,8 +265,8 @@ namespace TourCompany.DataAccess.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "CSV", "ConcurrencyStamp", "CreditCardNum", "Discriminator", "Email", "EmailConfirmed", "ExpiryDate", "Firstname", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "guest1", 0, 481, "664589b5-9324-4ba3-893c-80246b2372fa", "7391630561936204", "Customer", "Joe_Bloggs@email.com", false, new DateOnly(2028, 2, 17), "Joe", "Bloggs", false, null, null, null, null, "0986493740", false, "499e0f17-954b-46db-97bf-b98adb9bec83", false, null },
-                    { "guest2", 0, 123, "f1870b8f-b255-4be2-a9cd-bd070386de7f", "3905279573137936", "Customer", "JaneSmith@email.com", false, new DateOnly(2032, 4, 3), "Jane", "Smith", false, null, null, null, null, "0867491503", false, "5d7e753f-1e51-45e4-b6ce-33f58db595c4", false, null }
+                    { "guest1", 0, 481, "441cdd0b-bbef-4b88-a516-414178fb6ec4", "7391630561936204", "Customer", "Joe_Bloggs@email.com", false, new DateOnly(2028, 2, 17), "Joe", "Bloggs", false, null, null, null, null, "0986493740", false, "7020b229-0fc9-43fc-a043-9881c3fc6ad5", false, null },
+                    { "guest2", 0, 123, "65c030fa-4594-4ebe-b201-3ed8cceaaf86", "3905279573137936", "Customer", "JaneSmith@email.com", false, new DateOnly(2032, 4, 3), "Jane", "Smith", false, null, null, null, null, "0867491503", false, "cbc93dc4-d945-43dc-a314-ea38f1737010", false, null }
                 });
 
             migrationBuilder.InsertData(

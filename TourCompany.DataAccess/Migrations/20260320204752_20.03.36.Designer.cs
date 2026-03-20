@@ -12,8 +12,8 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    [Migration("20260312160625_12.03.26")]
-    partial class _120326
+    [Migration("20260320204752_20.03.36")]
+    partial class _200336
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -524,13 +524,13 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = "guest1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8eded0c4-dd1f-4bd1-8dd9-2e3347f6c1e4",
+                            ConcurrencyStamp = "441cdd0b-bbef-4b88-a516-414178fb6ec4",
                             Email = "Joe_Bloggs@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "0986493740",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "36779740-e7bd-4a2e-9904-7565d47ef6d2",
+                            SecurityStamp = "7020b229-0fc9-43fc-a043-9881c3fc6ad5",
                             TwoFactorEnabled = false,
                             CSV = 481,
                             CreditCardNum = "7391630561936204",
@@ -542,13 +542,13 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = "guest2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "02cbbf20-9e9f-430b-8a95-3f329ec132f8",
+                            ConcurrencyStamp = "65c030fa-4594-4ebe-b201-3ed8cceaaf86",
                             Email = "JaneSmith@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "0867491503",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "74e6b424-5538-4062-ad15-5d08b64508b7",
+                            SecurityStamp = "cbc93dc4-d945-43dc-a314-ea38f1737010",
                             TwoFactorEnabled = false,
                             CSV = 123,
                             CreditCardNum = "3905279573137936",
