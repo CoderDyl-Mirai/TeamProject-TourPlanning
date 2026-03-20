@@ -27,12 +27,6 @@ namespace TourCompany.DataAccess.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Customer>()
-                .HasData(
-                new Customer { Id = "guest1", Firstname = "Joe", Lastname = "Bloggs", Email = "Joe_Bloggs@email.com", PhoneNumber = "0986493740", CreditCardNum = "7391630561936204", ExpiryDate = new DateOnly(2028, 2, 17), CSV = 481 },
-                new Customer { Id = "guest2", Firstname = "Jane", Lastname = "Smith", Email = "JaneSmith@email.com", PhoneNumber = "0867491503", CreditCardNum = "3905279573137936", ExpiryDate = new DateOnly(2032, 4, 3), CSV = 123 }
-            );
-
             modelBuilder.Entity<Tour>()
                 .HasData(
                 new Tour { Id = 1, Name = "Glenveagh", Description = "Discover Glenveagh National Park on a scenic walking tour through rugged mountains, peaceful lakeshores, and native woodland. Follow tranquil paths to Glenveagh Castle, explore beautiful gardens, and experience breathtaking views, rich wildlife, and the park’s unique natural and cultural heritage.", Price = 15.00m, Image = @"\Images\Tours\Glenveagh.jpg", MaxCapacity = 20, MinCapacity = 5, Duration = 120, Location = "Donegal" },
@@ -43,18 +37,13 @@ namespace TourCompany.DataAccess.DataAccess
                 new Tour { Id = 6, Name = "Titanic Belfast", Description = "Experience the Titanic story through ten interactive galleries in a self-guided tour. Discover the sights, sounds, and stories of the ship, its passengers, and the city that built her, for the world’s most authentic and immersive retelling of this iconic maritime journey.", Price = 27.50m, Image = @"\Images\Tours\Titanic.jpg", MaxCapacity = 20, MinCapacity = 5, Duration = 100, Location = "Antrim" }
             );
 
-            modelBuilder.Entity<Booking>()
-                .HasData(
-                new Booking { Id = 1, TicketAmount = 2, TotalPrice = 60.00m, Date = new DateTime(2026, 7, 21, 14, 45, 0, DateTimeKind.Utc), CustomerId = "guest1", TourId = 4 },
-                new Booking { Id = 2, TicketAmount = 4, TotalPrice = 68.00m, Date = new DateTime(2026, 6, 15, 15, 0, 0, DateTimeKind.Utc), CustomerId = "guest2", TourId = 3 }
-            );
-
             modelBuilder.Entity<Extra>()
                 .HasData(
                 new Extra { Id = 1, Name = "Picnic", Description = "", Price = 20.00m, TourId = 3 },
-                new Extra { Id = 2, Name = "Audio Guide", Description = "", Price = 4.00m, TourId = 5 },
-                new Extra { Id = 3, Name = "Pour a Pint", Description = "", Price = 5.00m, TourId = 4 },
-                new Extra { Id = 4, Name = "Bike Rental", Description = "", Price = 8.00m, TourId = 1 }
+                new Extra { Id = 2, Name = "Picnic", Description = "", Price = 20.00m, TourId = 1 },
+                new Extra { Id = 3, Name = "Audio Guide", Description = "", Price = 4.00m, TourId = 5 },
+                new Extra { Id = 4, Name = "Pour a Pint", Description = "", Price = 5.00m, TourId = 4 },
+                new Extra { Id = 5, Name = "Bike Rental", Description = "", Price = 8.00m, TourId = 1 }
             );
 
         }

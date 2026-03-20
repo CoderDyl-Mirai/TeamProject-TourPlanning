@@ -19,11 +19,6 @@ namespace TourCompany.Models.Models
         public string? Lastname { get; set; }
 
         [RegularExpression(@"^[0-9]{16}$", ErrorMessage = "Credit Card number must be 16 digits.")]
-        public string? CreditCardNum { get; set; }
-
-        public DateOnly? ExpiryDate { get; set; }
-
-        public int CSV { get; set; }
 
         public List<Booking>? Bookings { get; set; }
 

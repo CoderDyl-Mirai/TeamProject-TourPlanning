@@ -9,7 +9,7 @@
 <div class="container p-3">
 	<div class="row pt-4">
 		<div class="col-6">
-			<h3 class="text-primary">My Bookings</h3>
+			<h3 class="text-primary">Manage Bookings</h3>
 		</div>
 	</div>
 
@@ -31,6 +31,7 @@
 				<th>Price</th>
 				<th>Duration</th>
 				<th>Location</th>
+				<th>Extras</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -45,6 +46,12 @@
 					<td width="10%">€@obj.TotalPrice</td>
 					<td width="10%">@obj.Tour.Duration Min</td>
 					<td width="10%">@obj.Tour.Location</td>
+					<td width="15%">
+						@foreach(var be in obj.BookingExtras)
+							{
+								@be.Extra.Name <br />
+							}
+						</td>
 					<td>
 						<button type="button" class="btn btn-danger mx-2 btnCancel" data-bs-toggle="modal" data-bs-target="#popup">Cancel</button>
 					</td>

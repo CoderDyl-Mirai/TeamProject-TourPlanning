@@ -47,9 +47,5 @@ namespace TourCompany.DataAccess.Repository
             return bookingDetails;
         }
 
-
-
-
-
     }
 }
