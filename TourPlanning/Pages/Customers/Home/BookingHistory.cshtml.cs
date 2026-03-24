@@ -45,12 +45,15 @@ namespace TourCompany.Pages.Customers.Home
 
                 var booking = _unitOfWork.BookingRepository.BookingDetails(userid).FirstOrDefault(b => b.Id == id);
 
-                booking.Status = "Cancelled";
+                if(booking.Status != "Completed" && booking.Status != "Cancelled")
+                {
+                    booking.Status = "Cancelled";
+                    _unitOfWork.BookingRepository.Update(booking);
+                    _unitOfWork.Save();
+                }
 
-                _unitOfWork.BookingRepository.Update(booking);
-                _unitOfWork.Save();
             }
-            return RedirectToPage("Index");
+            return RedirectToPage("BookingHistory");
         }
     }
 }

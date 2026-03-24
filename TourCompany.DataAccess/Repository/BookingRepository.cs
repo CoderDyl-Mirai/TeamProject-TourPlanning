@@ -42,7 +42,8 @@ namespace TourCompany.DataAccess.Repository
                 .Include(b => b.Tour)
                 .Include(b => b.BookingExtras)
                 .ThenInclude(e => e.Extra)
-                .OrderByDescending(b => b.Date)
+                .OrderByDescending(b => b.Status == "Confirmed")
+                .ThenByDescending(b => b.Date)
                 .ToList();
             return bookingDetails;
         }

@@ -53,14 +53,13 @@
 							}
 						</td>
 					<td>
-						<button type="button" class="btn btn-danger mx-2 btnCancel" data-bs-toggle="modal" data-bs-target="#popup">Cancel</button>
+						<button type="button" data-id="@obj.Id" class="btn btn-danger mx-2 btnCancel">Cancel</button>
 					</td>
 				</tr>
 			}
 		</tbody>
 	</table>
 </div>
-</form>
 
 <div class="modal fade" id="popup" tabindex="-1" aria-labelledby="popupLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -71,26 +70,35 @@
 			<div class="modal-body">
 				Are You Sure You Want To Cancel?
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">NO</button>
-				<button id="confirmBtn" type="submit" class="btn btn-danger">YES</button>
-			</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                <button  id="confirmBtn" type="button" class="btn btn-danger">YES</button>
+            </div>
 		</div>
 	</div>
 </div>
 
+</form>
+
 @section Scripts {
-	@{
-		<partial name="_validationScriptsPartial"></partial>
-	}
+    <script>
+
+		$(".btnCancel").click(function(){
+			var bookingId = $(this).data("id");      
+			$("#cancelBooking").val(bookingId);      
+
+			$("#popup").modal("show");                       
+		});
+
+		$("#confirmBtn").click(function(){
+			$("#bookingId").submit();                
+		});
+
+    </script>
 }
 
-<script>
-	$(".btnCancel").click(function(){
 
-		var cancelBooking = $(this).val();
-		console.log(cancelBooking;
 
-	});
-</script>
+
+
 
