@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourCompany.DataAccess.DataAccess;
 
@@ -11,9 +12,11 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    partial class TourDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260319213941_BookingStatus")]
+    partial class BookingStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -264,6 +267,28 @@ namespace TourCompany.DataAccess.Migrations
                     b.HasIndex("TourId");
 
                     b.ToTable("Bookings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CustomerId = "guest1",
+                            Date = new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc),
+                            Status = "",
+                            TicketAmount = 2,
+                            TotalPrice = 60.00m,
+                            TourId = 4
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CustomerId = "guest2",
+                            Date = new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc),
+                            Status = "",
+                            TicketAmount = 4,
+                            TotalPrice = 68.00m,
+                            TourId = 3
+                        });
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.BookingExtra", b =>
@@ -333,21 +358,13 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = 2,
                             Description = "",
-                            Name = "Picnic",
-                            Price = 20.00m,
-                            TourId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "",
                             Name = "Audio Guide",
                             Price = 4.00m,
                             TourId = 5
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             Description = "",
                             Name = "Pour a Pint",
                             Price = 5.00m,
@@ -355,7 +372,7 @@ namespace TourCompany.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 4,
                             Description = "",
                             Name = "Bike Rental",
                             Price = 8.00m,
@@ -480,6 +497,15 @@ namespace TourCompany.DataAccess.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<int>("CSV")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreditCardNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly?>("ExpiryDate")
+                        .HasColumnType("date");
+
                     b.Property<string>("Firstname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -495,13 +521,13 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = "guest1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "441cdd0b-bbef-4b88-a516-414178fb6ec4",
+                            ConcurrencyStamp = "4b7af2d3-cc23-407a-8dd8-6dd400b2289f",
                             Email = "Joe_Bloggs@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "0986493740",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7020b229-0fc9-43fc-a043-9881c3fc6ad5",
+                            SecurityStamp = "1ac15ee3-6a14-4acd-b7a4-52a7b4fc4939",
                             TwoFactorEnabled = false,
                             CSV = 481,
                             CreditCardNum = "7391630561936204",
@@ -513,13 +539,13 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = "guest2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "65c030fa-4594-4ebe-b201-3ed8cceaaf86",
+                            ConcurrencyStamp = "4eaee3f7-c60a-489c-a51c-ca1803d6c801",
                             Email = "JaneSmith@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "0867491503",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cbc93dc4-d945-43dc-a314-ea38f1737010",
+                            SecurityStamp = "4e5e7d7e-4174-4e67-b129-bdfc940acdf2",
                             TwoFactorEnabled = false,
                             CSV = 123,
                             CreditCardNum = "3905279573137936",

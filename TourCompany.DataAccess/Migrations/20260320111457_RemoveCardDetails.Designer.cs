@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourCompany.DataAccess.DataAccess;
 
@@ -11,9 +12,11 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    partial class TourDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260320111457_RemoveCardDetails")]
+    partial class RemoveCardDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -489,44 +492,6 @@ namespace TourCompany.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Customer");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "guest1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "441cdd0b-bbef-4b88-a516-414178fb6ec4",
-                            Email = "Joe_Bloggs@email.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PhoneNumber = "0986493740",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7020b229-0fc9-43fc-a043-9881c3fc6ad5",
-                            TwoFactorEnabled = false,
-                            CSV = 481,
-                            CreditCardNum = "7391630561936204",
-                            ExpiryDate = new DateOnly(2028, 2, 17),
-                            Firstname = "Joe",
-                            Lastname = "Bloggs"
-                        },
-                        new
-                        {
-                            Id = "guest2",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "65c030fa-4594-4ebe-b201-3ed8cceaaf86",
-                            Email = "JaneSmith@email.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PhoneNumber = "0867491503",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "cbc93dc4-d945-43dc-a314-ea38f1737010",
-                            TwoFactorEnabled = false,
-                            CSV = 123,
-                            CreditCardNum = "3905279573137936",
-                            ExpiryDate = new DateOnly(2032, 4, 3),
-                            Firstname = "Jane",
-                            Lastname = "Smith"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

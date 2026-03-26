@@ -8,6 +8,7 @@ namespace TourCompany.Services
         IExtraRepository ExtraRepository { get; }
         ITourRepository TourRepository { get; }
         ICustomerRepository CustomerRepository { get; }
+        IBookingExtraRepository BookingExtraRepository { get; }
         void Save();
     }
 }

@@ -15,6 +15,13 @@ namespace TourCompany.DataAccess.Repository
         {
             _dBContext = dbContext;
         }
-        
+        public List<Extra> GetExtrasForTour(int id)
+        {
+            var tourExtras = _dBContext.Extras.Where(b => b.TourId == id).ToList();
+            return tourExtras;
+        }
+
+
+
     }
 }

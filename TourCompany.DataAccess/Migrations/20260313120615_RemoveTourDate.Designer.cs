@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourCompany.DataAccess.DataAccess;
 
@@ -11,9 +12,11 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    partial class TourDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260313120615_RemoveTourDate")]
+    partial class RemoveTourDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,10 +246,6 @@ namespace TourCompany.DataAccess.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("TicketAmount")
                         .HasColumnType("int");
 
@@ -264,6 +263,26 @@ namespace TourCompany.DataAccess.Migrations
                     b.HasIndex("TourId");
 
                     b.ToTable("Bookings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CustomerId = "guest1",
+                            Date = new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc),
+                            TicketAmount = 2,
+                            TotalPrice = 60.00m,
+                            TourId = 4
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CustomerId = "guest2",
+                            Date = new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc),
+                            TicketAmount = 4,
+                            TotalPrice = 68.00m,
+                            TourId = 3
+                        });
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.BookingExtra", b =>
@@ -333,21 +352,13 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = 2,
                             Description = "",
-                            Name = "Picnic",
-                            Price = 20.00m,
-                            TourId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "",
                             Name = "Audio Guide",
                             Price = 4.00m,
                             TourId = 5
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             Description = "",
                             Name = "Pour a Pint",
                             Price = 5.00m,
@@ -355,7 +366,7 @@ namespace TourCompany.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 4,
                             Description = "",
                             Name = "Bike Rental",
                             Price = 8.00m,
@@ -480,6 +491,15 @@ namespace TourCompany.DataAccess.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<int>("CSV")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreditCardNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly?>("ExpiryDate")
+                        .HasColumnType("date");
+
                     b.Property<string>("Firstname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -495,13 +515,13 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = "guest1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "441cdd0b-bbef-4b88-a516-414178fb6ec4",
+                            ConcurrencyStamp = "f25a2d27-65e4-4a6b-81a8-4bca95dc3f90",
                             Email = "Joe_Bloggs@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "0986493740",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7020b229-0fc9-43fc-a043-9881c3fc6ad5",
+                            SecurityStamp = "072e6ac0-b63a-4494-89e6-b9eab6d6a757",
                             TwoFactorEnabled = false,
                             CSV = 481,
                             CreditCardNum = "7391630561936204",
@@ -513,13 +533,13 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = "guest2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "65c030fa-4594-4ebe-b201-3ed8cceaaf86",
+                            ConcurrencyStamp = "17ef1dcc-893d-41b8-b36f-6319525a51e6",
                             Email = "JaneSmith@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "0867491503",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cbc93dc4-d945-43dc-a314-ea38f1737010",
+                            SecurityStamp = "f7fcbe22-403a-4d48-8311-80feb58e3503",
                             TwoFactorEnabled = false,
                             CSV = 123,
                             CreditCardNum = "3905279573137936",

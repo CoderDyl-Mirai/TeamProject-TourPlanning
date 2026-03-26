@@ -21,35 +21,54 @@ namespace TourCompany.Pages.Customers.Home
         public Booking Booking { get; set; }
         [BindProperty]
         public Customer Customer { get; set; }
+        public BookingExtra BookingExtra { get; set; }
         public Tour Tour { get; set; }
+
+        public object BookingsOfTour;
+        public IEnumerable<Extra> Extras;
+        [BindProperty]
+
+        public IEnumerable<int> choosenExtra { get; set; }
         public void OnGet(int id)
         {
-            //var claimsIdentity = (ClaimsIdentity)User.Identity;
-            //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            
             Booking = new()
             {
-                //ApplicationUserId = claim.Value,
+                CustomerId = claim.Value,
                 TotalPrice = 0,
-                TicketAmount = 0,
+                TicketAmount = 1,
                 Tour = _unitOfWork.TourRepository.Get(id),
-                TourId = id
+                TourId = id,
+                Date = DateTime.Now
             };
+            Extras = _unitOfWork.ExtraRepository.GetExtrasForTour(id);
 
-            Customer = new()
-            {
-                //ApplicationUserId = claim.Value,
-                Firstname = "",
-                Lastname = "",
-                Email = "",
-            };
+            BookingsOfTour = _unitOfWork.BookingRepository.GetBookingsOfTour(id);
+
         }
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
-            {                
-                    _unitOfWork.BookingRepository.Add(Booking);
-                _unitOfWork.CustomerRepository.Add(Customer);
+            {
+                Booking.Status = "Confirmed";
+                _unitOfWork.BookingRepository.Add(Booking);
+
                 _unitOfWork.Save();
+                
+                foreach (var extra in choosenExtra)
+                {
+                    BookingExtra = new BookingExtra()
+                    {
+                        Qty = Booking.TicketAmount,
+                        ExtraId = extra,
+                        BookingId = Booking.Id
+                    };
+
+                    _unitOfWork.BookingExtraRepository.Add(BookingExtra);
+                    _unitOfWork.Save();
+                }
 
                 var domain = "https://localhost:7201";
                 var options = new SessionCreateOptions
@@ -86,12 +105,11 @@ namespace TourCompany.Pages.Customers.Home
                 Response.Headers.Add("Location", session.Url);
                 return new StatusCodeResult(303);
 
+                
 
 
-                //return RedirectToPage("Index");
-
+                return RedirectToPage("Index");
             }
-            return Page();
         }
     }
 }

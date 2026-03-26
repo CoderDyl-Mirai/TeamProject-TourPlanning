@@ -25,11 +25,6 @@
 				</div>
 
 				<div class="mb-3">
-					<label asp-for="@Model.Tour.Date"></label>
-					<input asp-for="@Model.Tour.Date" class="form-control" readonly/>
-				</div>
-
-				<div class="mb-3">
 					<label asp-for="@Model.Tour.Duration"></label>
 					<input asp-for="@Model.Tour.Duration" class="form-control" readonly/>
 				</div>
@@ -61,7 +56,7 @@
 			</div>
 		</div>
 		<button type="submit" class="btn btn-primary">Delete</button>
-		<a asp-page="Index" class="btn btn-secondary">Back to Index</a>
+		<a asp-page="Index" class="btn btn-secondary">Back</a>
 	</div>
 
 </form>
