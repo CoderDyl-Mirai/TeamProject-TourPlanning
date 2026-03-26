@@ -12,7 +12,7 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    [Migration("20260326154635_v1")]
+    [Migration("20260326165808_v1")]
     partial class v1
     {
         /// <inheritdoc />

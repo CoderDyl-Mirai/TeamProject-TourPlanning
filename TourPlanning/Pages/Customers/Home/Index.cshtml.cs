@@ -22,7 +22,7 @@ namespace TourCompany.Pages.Customers.Home
         public void OnGet()
         {
             listOfTours = _unitofWork.TourRepository.GetAll();
-            Extras = _unitofWork.ExtraRepository.GetAll();
+            Extras = _unitofWork.ExtraRepository.GetUniqueExtras();
             if(!string.IsNullOrEmpty(SearchString))
             {
                 listOfTours = listOfTours.Where(t => t.Name.Contains(SearchString, StringComparison.OrdinalIgnoreCase));

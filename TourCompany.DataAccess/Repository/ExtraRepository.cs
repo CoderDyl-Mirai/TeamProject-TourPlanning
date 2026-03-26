@@ -20,7 +20,15 @@ namespace TourCompany.DataAccess.Repository
             var tourExtras = _dBContext.Extras.Where(b => b.TourId == id).ToList();
             return tourExtras;
         }
+        public List<Extra> GetUniqueExtras()
+        {
+            var tourExtras = _dBContext.Extras
+         .GroupBy(e => e.Name)  
+         .Select(g => g.First())
+         .ToList();
+            return tourExtras;
 
+        }
 
 
     }

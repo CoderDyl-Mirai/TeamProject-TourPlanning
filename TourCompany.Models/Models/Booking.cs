@@ -22,6 +22,7 @@ namespace TourCompany.Models.Models
         [Range(0.01, 500, ErrorMessage = "Price must be between €0.01 and €500.00")]
         [Precision(6, 2)]
         public decimal TotalPrice { get; set; }
+        [Required(ErrorMessage = "Date is required")]
 
         public DateTime Date { get; set; }
 

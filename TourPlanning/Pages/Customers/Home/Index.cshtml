@@ -8,7 +8,7 @@
     @foreach (var extra in Model.Extras)
     {
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="extra-@extra.Id" />
+            <input class="extras form-check-input" type="checkbox" value="@extra.Name" id="extra-@extra.Id" />
             <label class="form-check-label" for="extra-@extra.Id">
                 @extra.Name 
             </label>
@@ -31,7 +31,7 @@
         {
             <h2 class="text-info"><b>@location.Key</b></h2>
 
-            <div class="row my-3">
+            <div class="row my-3" id="tours">
                 @foreach (var tour in location)
                 {
                     <div class="col-lg-4 col-md-6 pb-4 filter">
@@ -79,12 +79,14 @@
 
             }
         }
-                        $("#filterButton").hide()
+        $("#filterButton").hide()
 
         $("#filterButton").click(function(){
-                            $("#filter").show(); // show sidebar on large screens
+            $("#filter").show(); // show sidebar on large screens
 
         })
+
+        
 
         
 
@@ -95,5 +97,33 @@
         $(window).resize(function() {
             updateSidebar();
         });
+
+
+
+        $(".extras").change(function(){
+            selectedExtras = []
+            $(".extras").each(function(){
+
+                if ($(this).is(':checked'))
+                {
+                    selectedExtras.push($(this).val())
+                }
+
+            })
+            console.log(selectedExtras)
+            var extras = [
+                @foreach (var extra in Model.Extras)
+                {
+                        @: { name: "@extra.Name", tourId: @extra.TourId },
+                }
+            ];
+            extras.forEach(extra =>{
+                if(selectedExtras.includes(extra.name)){
+                    console.log(extra)
+                }
+            })
+
+            
+        })
     });
  </script>
