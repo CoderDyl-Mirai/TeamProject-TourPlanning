@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using TourCompany.DataAccess.Migrations;
 using TourCompany.Models.Models;
 using TourCompany.Services;
 
