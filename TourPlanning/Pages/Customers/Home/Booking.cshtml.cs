@@ -49,7 +49,8 @@ namespace TourCompany.Pages.Customers.Home
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
-            {                
+            {
+                Booking.Status = "Confirmed";
                 _unitOfWork.BookingRepository.Add(Booking);
 
                 _unitOfWork.Save();
@@ -61,6 +62,7 @@ namespace TourCompany.Pages.Customers.Home
                         ExtraId = extra,
                         BookingId = Booking.Id
                     };
+
                     _unitOfWork.BookingExtraRepository.Add(BookingExtra);
                     _unitOfWork.Save();
                 }

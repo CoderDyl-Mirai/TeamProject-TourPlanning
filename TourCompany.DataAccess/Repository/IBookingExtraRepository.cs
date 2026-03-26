@@ -9,5 +9,6 @@ namespace TourCompany.DataAccess.Repository
 {
     public interface IBookingExtraRepository : IRepository<BookingExtra>
     {
+        List<BookingExtra> GetBooking (int id);
     }
 }

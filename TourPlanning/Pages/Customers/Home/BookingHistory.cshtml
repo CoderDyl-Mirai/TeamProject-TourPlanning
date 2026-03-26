@@ -1,0 +1,111 @@
+﻿@page
+@model TourCompany.Pages.Customers.Home.BookingHistoryModel
+@{
+}
+<script src="jquery-3.7.1.min.js"></script>
+
+<form method="post" id="bookingId">
+    <input type="hidden" name="id" id="cancelBooking" />
+<div class="container p-3">
+	<div class="row pt-4">
+		<div class="col-6">
+			<h3 class="text-primary">Manage Bookings</h3>
+		</div>
+	</div>
+
+</div>
+
+<br />
+<br />
+<br />
+
+<div style="padding-bottom: 80px;">
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Status</th>
+				<th>Date</th>
+				<th>Name</th>
+				<th>Tickets</th>
+				<th>Price</th>
+				<th>Duration</th>
+				<th>Location</th>
+				<th>Extras</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var obj in Model.Booking)
+			{
+				<tr>
+					<td width="5%">@obj.Id</td>
+					<td width="10%">@obj.Status</td>
+					<td width="10%">@obj.Date</td>
+					<td width="10%">@obj.Tour.Name</td>
+					<td width="5%">@obj.TicketAmount</td>
+					<td width="10%">€@obj.TotalPrice</td>
+					<td width="10%">@obj.Tour.Duration Min</td>
+					<td width="10%">@obj.Tour.Location</td>
+					<td width="15%">
+						@foreach(var be in obj.BookingExtras)
+							{
+								@be.Extra.Name <br />
+							}
+						</td>
+					<td>
+						@if(obj.Status == "Confirmed")
+						{
+							<button type="button" data-id="@obj.Id" class="btn btn-danger mx-2 btnCancel">Cancel</button>
+						}
+						else
+						{
+							<button type="button" data-id="@obj.Id" class="btn btn-danger mx-2 btnCancel" disabled>Cancel</button>
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
+<div class="modal fade" id="popup" tabindex="-1" aria-labelledby="popupLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="popupLabel">Cancel Booking</h1>
+			</div>
+			<div class="modal-body">
+				Are You Sure You Want To Cancel?
+			</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                <button  id="confirmBtn" type="button" class="btn btn-danger">YES</button>
+            </div>
+		</div>
+	</div>
+</div>
+
+</form>
+
+@section Scripts {
+    <script>
+
+		$(".btnCancel").click(function(){
+			var bookingId = $(this).data("id");      
+			$("#cancelBooking").val(bookingId);      
+
+			$("#popup").modal("show");                       
+		});
+
+		$("#confirmBtn").click(function(){
+			$("#bookingId").submit();                
+		});
+
+    </script>
+}
+
+
+
+
+
+

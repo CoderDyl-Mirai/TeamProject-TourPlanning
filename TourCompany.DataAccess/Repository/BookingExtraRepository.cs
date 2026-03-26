@@ -16,5 +16,11 @@ namespace TourCompany.DataAccess.Repository
         {
             _dBContext = dbContext;
         }
+
+        public List<BookingExtra> GetBooking (int id)
+        {
+            var bookings = _dBContext.BookingExtras.Where(be => be.BookingId == id).ToList();
+            return bookings;
+        }
     }
 }
