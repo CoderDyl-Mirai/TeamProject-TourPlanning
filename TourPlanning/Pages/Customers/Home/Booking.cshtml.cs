@@ -108,8 +108,8 @@ namespace TourCompany.Pages.Customers.Home
                 
 
 
-                return RedirectToPage("Index");
             }
+            return RedirectToPage("Index");
         }
     }
 }

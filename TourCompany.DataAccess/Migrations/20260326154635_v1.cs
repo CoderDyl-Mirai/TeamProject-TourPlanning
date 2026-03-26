@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TourCompany.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class _200336 : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,9 +35,6 @@ namespace TourCompany.DataAccess.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreditCardNum = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExpiryDate = table.Column<DateOnly>(type: "date", nullable: true),
-                    CSV = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -71,7 +68,6 @@ namespace TourCompany.DataAccess.Migrations
                     MaxCapacity = table.Column<int>(type: "int", nullable: false),
                     MinCapacity = table.Column<int>(type: "int", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -191,6 +187,7 @@ namespace TourCompany.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TicketAmount = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(6,2)", precision: 6, scale: 2, nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -261,34 +258,16 @@ namespace TourCompany.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "CSV", "ConcurrencyStamp", "CreditCardNum", "Discriminator", "Email", "EmailConfirmed", "ExpiryDate", "Firstname", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[,]
-                {
-                    { "guest1", 0, 481, "441cdd0b-bbef-4b88-a516-414178fb6ec4", "7391630561936204", "Customer", "Joe_Bloggs@email.com", false, new DateOnly(2028, 2, 17), "Joe", "Bloggs", false, null, null, null, null, "0986493740", false, "7020b229-0fc9-43fc-a043-9881c3fc6ad5", false, null },
-                    { "guest2", 0, 123, "65c030fa-4594-4ebe-b201-3ed8cceaaf86", "3905279573137936", "Customer", "JaneSmith@email.com", false, new DateOnly(2032, 4, 3), "Jane", "Smith", false, null, null, null, null, "0867491503", false, "cbc93dc4-d945-43dc-a314-ea38f1737010", false, null }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Tours",
-                columns: new[] { "Id", "Date", "Description", "Duration", "Image", "Location", "MaxCapacity", "MinCapacity", "Name", "Price" },
+                columns: new[] { "Id", "Description", "Duration", "Image", "Location", "MaxCapacity", "MinCapacity", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2026, 6, 15, 10, 0, 0, 0, DateTimeKind.Utc), "Discover Glenveagh National Park on a scenic walking tour through rugged mountains, peaceful lakeshores, and native woodland. Follow tranquil paths to Glenveagh Castle, explore beautiful gardens, and experience breathtaking views, rich wildlife, and the park’s unique natural and cultural heritage.", 120, "\\Images\\Tours\\Glenveagh.jpg", "Donegal", 20, 5, "Glenveagh", 15.00m },
-                    { 2, new DateTime(2026, 7, 2, 13, 30, 0, 0, DateTimeKind.Utc), "Experience Fanad Lighthouse with a local guide, exploring the peninsula’s history. Learn about lighthouse keepers’ lives, stories of love, loss, and resilience. Discover how light has evolved over centuries with modern technology. Experience an authentic insight into life at this iconic Irish landmark.", 50, "\\Images\\Tours\\Fanad.jpg", "Donegal", 12, 4, "Fanad Lighthouse", 12.50m },
-                    { 3, new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc), "Join our Sliabh Liag walking tour from the Visitor Centre, exploring stunning cliffs, local culture, and history. Enjoy daily departures, guided insights into language and heritage, and breathtaking scenery, supported by DCC, Fáilte Ireland, and EU funding for an immersive and memorable experience.", 90, "\\Images\\Tours\\Slieve.jpg", "Donegal", 25, 6, "Slieve League", 17.00m },
-                    { 4, new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc), "Join an intimate Guinness tasting at St. James’s Gate, where a beer specialist guides you through flavors, aromas, and origins. Share stories with the group while exploring iconic Guinness varieties and learn the secrets behind Ireland’s famous brew in a memorable, immersive experience.", 60, "\\Images\\Tours\\Guinness.jpg", "Dublin", 15, 4, "Guinness", 30.00m },
-                    { 5, new DateTime(2026, 7, 12, 11, 30, 0, 0, DateTimeKind.Utc), "Explore Kilmainham Gaol and uncover Ireland’s history through the stories of prisoners—from ordinary criminals to freedom fighters. Learn about the 1798 Rebellion, 1916 Easter Rising,  and Civil War, each chapter revealing the struggles and resilience that shaped Ireland’s journey to independence.", 60, "\\Images\\Tours\\Kilmainham.jpg", "Dublin", 28, 7, "Kilmainham Gaol", 25.00m },
-                    { 6, new DateTime(2026, 7, 25, 9, 45, 0, 0, DateTimeKind.Utc), "Experience the Titanic story through ten interactive galleries in a self-guided tour. Discover the sights, sounds, and stories of the ship, its passengers, and the city that built her, for the world’s most authentic and immersive retelling of this iconic maritime journey.", 100, "\\Images\\Tours\\Titanic.jpg", "Antrim", 20, 5, "Titanic Belfast", 27.50m }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Bookings",
-                columns: new[] { "Id", "CustomerId", "Date", "TicketAmount", "TotalPrice", "TourId" },
-                values: new object[,]
-                {
-                    { 1, "guest1", new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc), 2, 60.00m, 4 },
-                    { 2, "guest2", new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc), 4, 68.00m, 3 }
+                    { 1, "Discover Glenveagh National Park on a scenic walking tour through rugged mountains, peaceful lakeshores, and native woodland. Follow tranquil paths to Glenveagh Castle, explore beautiful gardens, and experience breathtaking views, rich wildlife, and the park’s unique natural and cultural heritage.", 120, "\\Images\\Tours\\Glenveagh.jpg", "Donegal", 20, 5, "Glenveagh", 15.00m },
+                    { 2, "Experience Fanad Lighthouse with a local guide, exploring the peninsula’s history. Learn about lighthouse keepers’ lives, stories of love, loss, and resilience. Discover how light has evolved over centuries with modern technology. Experience an authentic insight into life at this iconic Irish landmark.", 50, "\\Images\\Tours\\Fanad.jpg", "Donegal", 12, 4, "Fanad Lighthouse", 12.50m },
+                    { 3, "Join our Sliabh Liag walking tour from the Visitor Centre, exploring stunning cliffs, local culture, and history. Enjoy daily departures, guided insights into language and heritage, and breathtaking scenery, supported by DCC, Fáilte Ireland, and EU funding for an immersive and memorable experience.", 90, "\\Images\\Tours\\Slieve.jpg", "Donegal", 25, 6, "Slieve League", 17.00m },
+                    { 4, "Join an intimate Guinness tasting at St. James’s Gate, where a beer specialist guides you through flavors, aromas, and origins. Share stories with the group while exploring iconic Guinness varieties and learn the secrets behind Ireland’s famous brew in a memorable, immersive experience.", 60, "\\Images\\Tours\\Guinness.jpg", "Dublin", 15, 4, "Guinness", 30.00m },
+                    { 5, "Explore Kilmainham Gaol and uncover Ireland’s history through the stories of prisoners—from ordinary criminals to freedom fighters. Learn about the 1798 Rebellion, 1916 Easter Rising,  and Civil War, each chapter revealing the struggles and resilience that shaped Ireland’s journey to independence.", 60, "\\Images\\Tours\\Kilmainham.jpg", "Dublin", 28, 7, "Kilmainham Gaol", 25.00m },
+                    { 6, "Experience the Titanic story through ten interactive galleries in a self-guided tour. Discover the sights, sounds, and stories of the ship, its passengers, and the city that built her, for the world’s most authentic and immersive retelling of this iconic maritime journey.", 100, "\\Images\\Tours\\Titanic.jpg", "Antrim", 20, 5, "Titanic Belfast", 27.50m }
                 });
 
             migrationBuilder.InsertData(
@@ -297,9 +276,10 @@ namespace TourCompany.DataAccess.Migrations
                 values: new object[,]
                 {
                     { 1, "", "Picnic", 20.00m, 3 },
-                    { 2, "", "Audio Guide", 4.00m, 5 },
-                    { 3, "", "Pour a Pint", 5.00m, 4 },
-                    { 4, "", "Bike Rental", 8.00m, 1 }
+                    { 2, "", "Picnic", 20.00m, 1 },
+                    { 3, "", "Audio Guide", 4.00m, 5 },
+                    { 4, "", "Pour a Pint", 5.00m, 4 },
+                    { 5, "", "Bike Rental", 8.00m, 1 }
                 });
 
             migrationBuilder.CreateIndex(
