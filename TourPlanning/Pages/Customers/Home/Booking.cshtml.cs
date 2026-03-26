@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Stripe.Checkout;
+using Stripe.Climate;
 using System.Security.Claims;
 using TourCompany.Models.Models;
 using TourCompany.Services;
@@ -47,10 +49,12 @@ namespace TourCompany.Pages.Customers.Home
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
-            {                
+            {
+                Booking.Status = "Confirmed";
                 _unitOfWork.BookingRepository.Add(Booking);
 
                 _unitOfWork.Save();
+                
                 foreach (var extra in choosenExtra)
                 {
                     BookingExtra = new BookingExtra()
@@ -59,14 +63,51 @@ namespace TourCompany.Pages.Customers.Home
                         ExtraId = extra,
                         BookingId = Booking.Id
                     };
+
                     _unitOfWork.BookingExtraRepository.Add(BookingExtra);
                     _unitOfWork.Save();
                 }
 
+                var domain = "https://localhost:7201";
+                var options = new SessionCreateOptions
+                {
+                    LineItems = new List<SessionLineItemOptions>
+                {
+                  new SessionLineItemOptions
+                  {
+                      PriceData= new SessionLineItemPriceDataOptions
+                      {
+                          UnitAmount = (long)(Booking.TotalPrice *100),
+                          Currency="eur",
+                          ProductData = new SessionLineItemPriceDataProductDataOptions
+                          {
+                              Name = "Sweeneys"
+                          }
+                      },
 
-                return RedirectToPage("Index");
+                    Quantity = 1,
+                  },
+                },
+                    PaymentMethodTypes = new List<string>
+                {
+                    "card",
+                },
+
+                    Mode = "payment",
+                    SuccessUrl = domain + "/Customers/Home",
+                    CancelUrl = domain + "/Customers/Home",
+                };
+                var service = new SessionService();
+                Session session = service.Create(options);
+
+                Response.Headers.Add("Location", session.Url);
+                return new StatusCodeResult(303);
+
+                
+
+
             }
-            return Page();
+            return RedirectToPage("Index");
         }
     }
 }

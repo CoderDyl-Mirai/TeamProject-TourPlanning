@@ -45,6 +45,12 @@ namespace TourCompany.Pages.Admin.Customers
 
             foreach(var booking in bookings)
             {
+                var extras = _unitOfWork.BookingExtraRepository.GetBooking(booking.Id);
+                foreach(var extra in extras)
+                {
+                    _unitOfWork.BookingExtraRepository.Delete(extra);
+                }
+
                 _unitOfWork.BookingRepository.Delete(booking);
             }
 

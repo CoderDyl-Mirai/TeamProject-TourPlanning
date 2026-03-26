@@ -14,6 +14,8 @@ namespace TourCompany.Models.Models
     {
         public int Id { get; set; }
 
+        public string Status {  get; set; } = string.Empty;
+
         [Required]
         public int TicketAmount { get; set; }
 

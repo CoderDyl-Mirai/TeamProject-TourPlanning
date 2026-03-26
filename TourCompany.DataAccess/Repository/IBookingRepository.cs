@@ -11,5 +11,6 @@ namespace TourCompany.DataAccess.Repository
     {
         List<Booking> CustomerBooking(string id);
         object GetBookingsOfTour(int id);
+        List<Booking> BookingDetails (string id);
     }
 }

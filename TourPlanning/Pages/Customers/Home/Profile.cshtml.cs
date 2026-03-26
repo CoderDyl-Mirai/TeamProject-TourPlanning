@@ -38,9 +38,6 @@ namespace TourCompany.Pages.Customers.Home
                 customer.Firstname = Customer.Firstname;
                 customer.Lastname = Customer.Lastname;
                 customer.PhoneNumber = Customer.PhoneNumber;
-                customer.CreditCardNum = Customer.CreditCardNum;
-                customer.ExpiryDate = Customer.ExpiryDate;
-                customer.CSV = Customer.CSV;
 
                 _unitOfWork.CustomerRepository.Update(customer);
                 _unitOfWork.Save();
