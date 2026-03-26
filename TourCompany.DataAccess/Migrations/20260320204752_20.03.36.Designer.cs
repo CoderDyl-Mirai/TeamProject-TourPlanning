@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourCompany.DataAccess.DataAccess;
 
@@ -11,9 +12,11 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    partial class TourDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260320204752_20.03.36")]
+    partial class _200336
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,10 +246,6 @@ namespace TourCompany.DataAccess.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("TicketAmount")
                         .HasColumnType("int");
 
@@ -264,6 +263,26 @@ namespace TourCompany.DataAccess.Migrations
                     b.HasIndex("TourId");
 
                     b.ToTable("Bookings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CustomerId = "guest1",
+                            Date = new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc),
+                            TicketAmount = 2,
+                            TotalPrice = 60.00m,
+                            TourId = 4
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CustomerId = "guest2",
+                            Date = new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc),
+                            TicketAmount = 4,
+                            TotalPrice = 68.00m,
+                            TourId = 3
+                        });
                 });
 
             modelBuilder.Entity("TourCompany.Models.Models.BookingExtra", b =>
@@ -333,21 +352,13 @@ namespace TourCompany.DataAccess.Migrations
                         {
                             Id = 2,
                             Description = "",
-                            Name = "Picnic",
-                            Price = 20.00m,
-                            TourId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "",
                             Name = "Audio Guide",
                             Price = 4.00m,
                             TourId = 5
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             Description = "",
                             Name = "Pour a Pint",
                             Price = 5.00m,
@@ -355,7 +366,7 @@ namespace TourCompany.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 4,
                             Description = "",
                             Name = "Bike Rental",
                             Price = 8.00m,
@@ -370,6 +381,9 @@ namespace TourCompany.DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -405,6 +419,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            Date = new DateTime(2026, 6, 15, 10, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Discover Glenveagh National Park on a scenic walking tour through rugged mountains, peaceful lakeshores, and native woodland. Follow tranquil paths to Glenveagh Castle, explore beautiful gardens, and experience breathtaking views, rich wildlife, and the park’s unique natural and cultural heritage.",
                             Duration = 120,
                             Image = "\\Images\\Tours\\Glenveagh.jpg",
@@ -417,6 +432,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 2,
+                            Date = new DateTime(2026, 7, 2, 13, 30, 0, 0, DateTimeKind.Utc),
                             Description = "Experience Fanad Lighthouse with a local guide, exploring the peninsula’s history. Learn about lighthouse keepers’ lives, stories of love, loss, and resilience. Discover how light has evolved over centuries with modern technology. Experience an authentic insight into life at this iconic Irish landmark.",
                             Duration = 50,
                             Image = "\\Images\\Tours\\Fanad.jpg",
@@ -429,6 +445,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 3,
+                            Date = new DateTime(2026, 6, 15, 15, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Join our Sliabh Liag walking tour from the Visitor Centre, exploring stunning cliffs, local culture, and history. Enjoy daily departures, guided insights into language and heritage, and breathtaking scenery, supported by DCC, Fáilte Ireland, and EU funding for an immersive and memorable experience.",
                             Duration = 90,
                             Image = "\\Images\\Tours\\Slieve.jpg",
@@ -441,6 +458,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 4,
+                            Date = new DateTime(2026, 7, 21, 14, 45, 0, 0, DateTimeKind.Utc),
                             Description = "Join an intimate Guinness tasting at St. James’s Gate, where a beer specialist guides you through flavors, aromas, and origins. Share stories with the group while exploring iconic Guinness varieties and learn the secrets behind Ireland’s famous brew in a memorable, immersive experience.",
                             Duration = 60,
                             Image = "\\Images\\Tours\\Guinness.jpg",
@@ -453,6 +471,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 5,
+                            Date = new DateTime(2026, 7, 12, 11, 30, 0, 0, DateTimeKind.Utc),
                             Description = "Explore Kilmainham Gaol and uncover Ireland’s history through the stories of prisoners—from ordinary criminals to freedom fighters. Learn about the 1798 Rebellion, 1916 Easter Rising,  and Civil War, each chapter revealing the struggles and resilience that shaped Ireland’s journey to independence.",
                             Duration = 60,
                             Image = "\\Images\\Tours\\Kilmainham.jpg",
@@ -465,6 +484,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 6,
+                            Date = new DateTime(2026, 7, 25, 9, 45, 0, 0, DateTimeKind.Utc),
                             Description = "Experience the Titanic story through ten interactive galleries in a self-guided tour. Discover the sights, sounds, and stories of the ship, its passengers, and the city that built her, for the world’s most authentic and immersive retelling of this iconic maritime journey.",
                             Duration = 100,
                             Image = "\\Images\\Tours\\Titanic.jpg",
@@ -479,6 +499,15 @@ namespace TourCompany.DataAccess.Migrations
             modelBuilder.Entity("TourCompany.Models.Models.Customer", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<int>("CSV")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreditCardNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly?>("ExpiryDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("Firstname")
                         .IsRequired()
