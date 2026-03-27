@@ -15,14 +15,14 @@ namespace TourCompany.Pages.Customers.Home
         }
 
         public IEnumerable<Tour> listOfTours {  get; set; }
-
+        public IEnumerable<Extra> Extras { get; set; }
         [BindProperty(SupportsGet =true)]
 
         public string? SearchString { get; set; }
         public void OnGet()
         {
             listOfTours = _unitofWork.TourRepository.GetAll();
-            
+            Extras = _unitofWork.ExtraRepository.GetUniqueExtras();
             if(!string.IsNullOrEmpty(SearchString))
             {
                 listOfTours = listOfTours.Where(t => t.Name.Contains(SearchString, StringComparison.OrdinalIgnoreCase));
