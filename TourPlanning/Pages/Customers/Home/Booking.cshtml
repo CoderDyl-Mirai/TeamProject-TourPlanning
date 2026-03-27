@@ -21,12 +21,30 @@
 				<div class="mb-3">
 					<label asp-for="@Model.Booking.Date">Date (Must be between 9:00-19:00)</label>
 					<input asp-for="@Model.Booking.Date"
-						   type="datetime-local"
+						   type="date"
 						   id="date"
 						   class="form-control"
-						   min="@DateTime.Now.AddHours(1).AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second).ToString("yyyy-MM-ddTHH:mm")"
-						   max="@DateTime.Now.AddMonths(6).AddMinutes(-DateTime.Now.Minute).AddSeconds(-DateTime.Now.Second).ToString("yyyy-MM-ddTHH:mm")"
-						   step="3600" />
+						   min="@DateTime.Now.ToString("yyyy-MM-dd")"
+						   max="@DateTime.Now.AddMonths(6).ToString("yyyy-MM-dd")" />
+					<span asp-validation-for="@Model.Booking.Date" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="@Model.Booking.Time"></label>
+					<select asp-for="@Model.Booking.Time" id="time" class="form-select">
+						<option>09:00</option>
+						<option>10:00</option>
+						<option>11:00</option>
+						<option>12:00</option>
+						<option>13:00</option>
+						<option>14:00</option>
+						<option>15:00</option>
+						<option>16:00</option>
+						<option>17:00</option>
+						<option>17:00</option>
+						<option>17:00</option>
+
+					</select>
 					<span asp-validation-for="@Model.Booking.Date" class="text-danger"></span>
 				</div>
 
@@ -38,7 +56,7 @@
 
 				<div class="mb-3">
 					<label asp-for="@Model.Booking.TotalPrice"></label>
-					<input asp-for="@Model.Booking.TotalPrice" value="@Model.Booking.Tour.Price" id="totalPrice" class="form-control" disabled />
+					<input asp-for="@Model.Booking.TotalPrice" value="@Model.Booking.Tour.Price" id="totalPrice" class="form-control" readonly />
 					<span asp-validation-for="@Model.Booking.TotalPrice" class="text-danger"></span>
 				</div>
 
@@ -113,20 +131,13 @@
 
 	var $dateInput = $('#date');
 
-	function snapToHour(value) {
-		if (!value) return value;
-		var parts = value.split('T');
-		var datePart = parts[0];
-		var hour = parts[1].split(':')[0];
-		return datePart + 'T' + hour.padStart(2, '0') + ':00';
-	}
-
+	
 		// Snap on page load
-	$dateInput.val(snapToHour($dateInput.val()));
+	//$dateInput.val(snapToHour($dateInput.val()));
 
 		// Snap whenever user changes the input
 	$dateInput.on('input change', function() {
-		$(this).val(snapToHour($(this).val()));
+		//$(this).val(snapToHour($(this).val()));
 
 		currentCap = 0
 		console.log(bookings)
@@ -154,18 +165,7 @@
 		}
 	});
 
-	$("#date").on("change", function () {
-		const value = $(this).val();
-		if (!value) return;
 
-		const selected = new Date(value);
-		const hours = selected.getHours();
-
-		if (hours < 9 || hours >= 19.99) {
-			alert("Please select a time between 09:00 and 19:00.");
-			$(this).val("");
-		}
-	});
 	
 	</script>
 	@section Scripts{

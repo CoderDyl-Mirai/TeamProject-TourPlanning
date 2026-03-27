@@ -26,7 +26,7 @@
             <input type="submit" value="Search" class="btn btn-outline-secondary" />
             <a asp-route-Tours="" asp-route-SearchString="" class="btn btn-outline-secondary ms-2">Clear</a>
         </form>
-
+        <div id="data">
         @foreach (var location in Model.listOfTours.GroupBy(t => t.Location))
         {
             <h2 class="text-info"><b>@location.Key</b></h2>
@@ -57,8 +57,10 @@
                         </div>
                     </div>
                 }
-            </div>
+                </div>
         }
+                    </div>
+
     </main>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -66,6 +68,19 @@
 <script>
 
         $(document).ready(function() {
+             var tours = @Html.Raw(Json.Serialize(
+        Model.listOfTours.Select(t => new {
+            Id = t.Id,
+            Location = t.Location,
+            Name = t.Name,
+            Price = t.Price,
+            Description = t.Description,
+            Image = t.Image
+        })
+        
+    ));
+    console.log(tours)
+
         function updateSidebar() {
             var width = $(window).width();
             console.log("Window width:", width);
@@ -101,29 +116,118 @@
 
 
         $(".extras").change(function(){
-            selectedExtras = []
-            $(".extras").each(function(){
-
-                if ($(this).is(':checked'))
-                {
-                    selectedExtras.push($(this).val())
-                }
-
-            })
-            console.log(selectedExtras)
-            var extras = [
-                @foreach (var extra in Model.Extras)
-                {
-                        @: { name: "@extra.Name", tourId: @extra.TourId },
-                }
-            ];
-            extras.forEach(extra =>{
-                if(selectedExtras.includes(extra.name)){
-                    console.log(extra)
-                }
-            })
-
-            
-        })
+    let selectedExtras = [];
+    $(".extras").each(function(){
+        if ($(this).is(':checked')) {
+            selectedExtras.push($(this).val());
+        }
     });
+    console.log(selectedExtras);
+
+    let extras = [
+        @foreach (var extra in Model.Extras)
+        {
+            @: { name: "@extra.Name", tourId: @extra.TourId },
+        }
+    ];
+
+    const filteredTours = {};
+    const locations = [];
+    const allLocations = [];
+    tours.forEach(tour => {
+        if (!allLocations.includes(tour.location)) {
+                    allLocations.push(tour.location);
+                }
+    })
+    extras.forEach(extra => {
+        if (selectedExtras.includes(extra.name)) {
+            tours.forEach(tour => {
+                console.log(tour);
+                
+
+                if (tour.id == extra.tourId) {
+                    if (!filteredTours[tour.location]) {
+                        filteredTours[tour.location] = [];
+                    }
+                    filteredTours[tour.location].push(tour);
+
+                    if (!locations.includes(tour.location)) {
+                        locations.push(tour.location);
+                    }
+                    console.log(123);
+                    console.log(tour);
+                }
+            });
+        }
+    });
+
+    console.log(filteredTours);
+
+    let filtered = ``;
+    console.log(filtered)
+    locations.forEach(loc => {
+        filtered += `<h2 class="text-info"><b>${loc}</b></h2>
+            <div class="row my-3" id="tours">`;
+
+        filteredTours[loc].forEach(tour => {
+            filtered += `<div class="col-lg-4 col-md-6 pb-4 filter">
+                <div class="card bg-white rounded shadow-sm" style="border:1px solid #222">
+                    <div class="card-body pb-1 row">
+                        <div class="col-8 h5">${tour.name}</div>
+                        <div class="col-4 text-end">
+                            <span class="text-info h4">€${tour.price}</span>
+                        </div>
+                    </div>
+                    <img class="card-img-top img-fluid d-block mx-auto mb-3" src="${tour.image}">
+                    <div class="card-body p-1 px-3">
+                        <p style="font-size:13px; text-align:justify">${tour.description}</p>
+                        <a asp-page="Details" asp-route-id="${tour.id}" class="btn btn-dark form-control btn-sm p-2">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>`;
+            console.log(tour);
+        });
+        filtered += `</div>`; // close row
+    });
+
+    if (filtered === ``) {
+        console.log(234)
+                        console.log(allLocations)
+
+        allLocations.forEach(loc => {
+            filtered += `<h2 class="text-info"><b>${loc}</b></h2>
+                <div class="row my-3" id="tours">`;
+            tours.forEach(tour => {
+                console.log(tour)
+                if (tour.location === loc) {
+                    filtered += `<div class="col-lg-4 col-md-6 pb-4 filter">
+                        <div class="card bg-white rounded shadow-sm" style="border:1px solid #222">
+                            <div class="card-body pb-1 row">
+                                <div class="col-8 h5">${tour.name}</div>
+                                <div class="col-4 text-end">
+                                    <span class="text-info h4">€${tour.price}</span>
+                                </div>
+                            </div>
+                            <img class="card-img-top img-fluid d-block mx-auto mb-3" src="${tour.image}">
+                            <div class="card-body p-1 px-3">
+                                <p style="font-size:13px; text-align:justify">${tour.description}</p>
+                                <a asp-page="Details" asp-route-id="${tour.id}" class="btn btn-dark form-control btn-sm p-2">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>`;
+                    console.log(tour);
+                }
+            });
+
+            filtered += `</div>`; // close row
+        });
+    }
+
+    $("#data").html(filtered);
+});
+})
  </script>

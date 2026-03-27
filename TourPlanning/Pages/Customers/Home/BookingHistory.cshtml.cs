@@ -26,7 +26,7 @@ namespace TourCompany.Pages.Customers.Home
 
             foreach (var booking in Booking)
             {
-                if (booking.Date < DateTime.Now && booking.Status == "Confirmed")
+                if (booking.Date < DateOnly.FromDateTime(DateTime.Now) && booking.Status == "Confirmed")
                 {
                     booking.Status = "Completed";
                 }

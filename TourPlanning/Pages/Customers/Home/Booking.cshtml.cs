@@ -39,7 +39,7 @@ namespace TourCompany.Pages.Customers.Home
                 TicketAmount = 1,
                 Tour = _unitOfWork.TourRepository.Get(id),
                 TourId = id,
-                Date = DateTime.Now
+                Date = DateOnly.FromDateTime(DateTime.Now)
             };
             Extras = _unitOfWork.ExtraRepository.GetExtrasForTour(id);
 
