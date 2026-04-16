@@ -1,0 +1,40 @@
+﻿@page
+@model TourCompany.Pages.Customers.Home.SummaryModel
+@{
+}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-dark text-light">
+            <h3 class="mb-0">Order Summary</h3>
+        </div>
+        <div class="card-body">
+            <h5>Customer</h5>
+            <p>
+                <strong>@Model.Booking.Customer?.Firstname @Model.Booking.Customer?.Lastname</strong><br />
+                @Model.Booking.Customer?.Email
+            </p>
+
+            <h5>Tour</h5>
+            <p>
+                <strong>@Model.Booking.Tour?.Name</strong><br />
+                Date: @Model.Booking.Tour?.Date<br />
+                Location: @Model.Booking.Tour?.Location
+            </p>
+
+            <h5>Order</h5>
+            <p>
+                Tickets: @Model.Booking.TicketAmount<br />
+                Total: €@Model.Booking.TotalPrice.ToString("0.00")<br />
+                Date Booked: @Model.Booking.Date.ToString("g")
+            </p>
+
+            <h5>Payment</h5>
+            <p>
+                Status: <strong>@Model.PaymentStatus</strong>
+            </p>
+        </div>
+        <div class="card-footer text-end">
+            <a asp-page="Index" class="btn btn-secondary">Back to Tours</a>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Stripe.Checkout;
-using Stripe.Climate;
+using System;
 using System.Security.Claims;
 using TourCompany.Models.Models;
 using TourCompany.Services;
@@ -24,11 +24,8 @@ namespace TourCompany.Pages.Customers.Home
         public Tour Tour { get; set; }
         public void OnGet(int id)
         {
-            //var claimsIdentity = (ClaimsIdentity)User.Identity;
-            //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             Booking = new()
             {
-                //ApplicationUserId = claim.Value,
                 TotalPrice = 0,
                 TicketAmount = 0,
                 Tour = _unitOfWork.TourRepository.Get(id),
@@ -37,7 +34,6 @@ namespace TourCompany.Pages.Customers.Home
 
             Customer = new()
             {
-                //ApplicationUserId = claim.Value,
                 Firstname = "",
                 Lastname = "",
                 Email = "",
@@ -45,52 +41,61 @@ namespace TourCompany.Pages.Customers.Home
         }
         public IActionResult OnPost()
         {
-            if (ModelState.IsValid)
-            {                
-                    _unitOfWork.BookingRepository.Add(Booking);
-                _unitOfWork.CustomerRepository.Add(Customer);
-                _unitOfWork.Save();
+            if (!ModelState.IsValid)
+                return Page();
 
-                var domain = "https://localhost:7201";
-                var options = new SessionCreateOptions
-                {
-                    LineItems = new List<SessionLineItemOptions>
+            _unitOfWork.BookingRepository.Add(Booking);
+            _unitOfWork.CustomerRepository.Add(Customer);
+            _unitOfWork.Save(); 
+
+            var domain = "https://localhost:7201";
+            var successUrl = $"{domain}/Customers/Home/Summary?bookingId={Booking.Id}&session_id={{CHECKOUT_SESSION_ID}}";
+            var cancelUrl = $"{domain}/Customers/Home/Booking?id={Booking.TourId}";
+
+            var unitAmountCents = Convert.ToInt64(Math.Round(Booking.TotalPrice * 100m));
+
+            var options = new SessionCreateOptions
+            {
+                LineItems = new List<SessionLineItemOptions>
                 {
                   new SessionLineItemOptions
                   {
                       PriceData= new SessionLineItemPriceDataOptions
                       {
-                          UnitAmount = (long)(Booking.TotalPrice *100),
+                          UnitAmount = unitAmountCents,
                           Currency="eur",
                           ProductData = new SessionLineItemPriceDataProductDataOptions
                           {
-                              Name = "Sweeneys"
+                              Name = Booking.Tour?.Name ?? "Tour booking"
                           }
                       },
-
-                    Quantity = 1,
+                      Quantity = Booking.TicketAmount > 0 ? Booking.TicketAmount : 1,
                   },
                 },
-                    PaymentMethodTypes = new List<string>
-                {
-                    "card",
-                },
+                PaymentMethodTypes = new List<string> { "card" },
+                Mode = "payment",
+                SuccessUrl = successUrl,
+                CancelUrl = cancelUrl,
+            };
 
-                    Mode = "payment",
-                    SuccessUrl = domain + "/Customers/Home",
-                    CancelUrl = domain + "/Customers/Home",
-                };
-                var service = new SessionService();
-                Session session = service.Create(options);
-
-                Response.Headers.Add("Location", session.Url);
-                return new StatusCodeResult(303);
-
-
-
-                //return RedirectToPage("Index");
-
+            var service = new SessionService();
+            Session session;
+            try
+            {
+                session = service.Create(options);
             }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Could not create Stripe Checkout session: " + ex.Message);
+                return Page();
+            }
+
+            if (!string.IsNullOrEmpty(session.Url))
+            {
+                return Redirect(session.Url);
+            }
+
+            ModelState.AddModelError(string.Empty, "Stripe returned an empty session URL.");
             return Page();
         }
     }
