@@ -190,7 +190,8 @@ namespace TourCompany.DataAccess.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TicketAmount = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(6,2)", precision: 6, scale: 2, nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    Time = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     TourId = table.Column<int>(type: "int", nullable: false)
                 },

@@ -30,7 +30,8 @@ namespace TourCompany.DataAccess.Repository
                 .Select(b => new
             {
                 b.Date,
-                b.TicketAmount
+                b.TicketAmount,
+                b.Time
             })
             .ToList();
             return bookingOfTour;

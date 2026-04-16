@@ -24,7 +24,7 @@
 						   type="date"
 						   id="date"
 						   class="form-control"
-						   min="@DateTime.Now.ToString("yyyy-MM-dd")"
+						   min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")"
 						   max="@DateTime.Now.AddMonths(6).ToString("yyyy-MM-dd")" />
 					<span asp-validation-for="@Model.Booking.Date" class="text-danger"></span>
 				</div>
@@ -32,6 +32,7 @@
 				<div class="mb-3">
 					<label asp-for="@Model.Booking.Time"></label>
 					<select asp-for="@Model.Booking.Time" id="time" class="form-select">
+						<option disabled selected>Select Time</option>
 						<option>09:00</option>
 						<option>10:00</option>
 						<option>11:00</option>
@@ -41,8 +42,8 @@
 						<option>15:00</option>
 						<option>16:00</option>
 						<option>17:00</option>
-						<option>17:00</option>
-						<option>17:00</option>
+						<option>18:00</option>
+						<option>19:00</option>
 
 					</select>
 					<span asp-validation-for="@Model.Booking.Date" class="text-danger"></span>
@@ -105,18 +106,22 @@
 		console.log(bookings)
 		bookings.forEach(function(booking){
 			//console.log($("#date").val())
-			date = booking.date.substring(0,16)
+			date = booking.date
+			time = booking.time
+
 			//console.log(date)
-			if(date === $("#date").val())
+			if(date === $("#date").val() && time === $('#time option:selected').text())
 			{
 				currentCap += booking.ticketAmount
 			}
+
 		})
 		console.log(currentCap+Number($("#ticketAmount").val()))
 		if(currentCap+Number($("#ticketAmount").val())>@Model.Booking.Tour.MaxCapacity)
 		{
 			$("#submit").prop("disabled",true);
 			alert("Ticket amount chosen puts tour over capacity")
+			$("#ticketAmount").val(@Model.Booking.Tour.MaxCapacity-currentCap)
 		}
 		else{
 			$("#submit").prop("disabled",false);
@@ -128,6 +133,7 @@
 	
 	var bookings = @Html.Raw(Json.Serialize(Model.BookingsOfTour));
 
+	
 
 	var $dateInput = $('#date');
 
