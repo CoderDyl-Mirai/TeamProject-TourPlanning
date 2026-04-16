@@ -24,7 +24,7 @@ namespace TourCompany.Models.Models
         public decimal TotalPrice { get; set; }
 
         public DateOnly Date { get; set; }
-        public DateOnly Time { get; set; }
+        public string? Time { get; set; }
 
         public string? CustomerId { get; set; }
         public Customer? Customer { get; set; }
