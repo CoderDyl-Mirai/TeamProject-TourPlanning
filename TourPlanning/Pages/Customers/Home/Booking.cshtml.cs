@@ -82,7 +82,7 @@ namespace TourCompany.Pages.Customers.Home
                           Currency="eur",
                           ProductData = new SessionLineItemPriceDataProductDataOptions
                           {
-                              Name = "Sweeneys"
+                              Name = "Terrific Tours"
                           }
                       },
 

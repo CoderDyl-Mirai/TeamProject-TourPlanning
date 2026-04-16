@@ -110,10 +110,15 @@
 			time = booking.time
 
 			//console.log(date)
-			if(date === $("#date").val() && time === $('#time option:selected').text())
+			if (booking.status == "Confirmed")
 			{
-				currentCap += booking.ticketAmount
+				if(date === $("#date").val() && time === $('#time option:selected').text())
+				{
+					currentCap += booking.ticketAmount
+				}
 			}
+
+			
 
 		})
 		console.log(currentCap+Number($("#ticketAmount").val()))
@@ -132,8 +137,6 @@
 
 	
 	var bookings = @Html.Raw(Json.Serialize(Model.BookingsOfTour));
-
-	
 
 	var $dateInput = $('#date');
 

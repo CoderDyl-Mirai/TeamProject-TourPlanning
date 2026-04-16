@@ -31,7 +31,8 @@ namespace TourCompany.DataAccess.Repository
             {
                 b.Date,
                 b.TicketAmount,
-                b.Time
+                b.Time,
+                b.Status
             })
             .ToList();
             return bookingOfTour;
