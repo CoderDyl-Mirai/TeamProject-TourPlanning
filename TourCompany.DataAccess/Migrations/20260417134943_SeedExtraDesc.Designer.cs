@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourCompany.DataAccess.DataAccess;
 
@@ -11,9 +12,11 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    partial class TourDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260417134943_SeedExtraDesc")]
+    partial class SeedExtraDesc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -327,7 +330,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Includes drinks and sandwiches for up to 4 people",
+                            Description = "Includes drinks, sandwiches and fruit for up to 4 people",
                             Name = "Picnic",
                             Price = 20.00m,
                             TourId = 3
@@ -335,7 +338,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            Description = "Includes drinks and sandwiches for up to 4 people",
+                            Description = "Includes drinks, sandwiches and fruit for up to 4 people",
                             Name = "Picnic",
                             Price = 20.00m,
                             TourId = 1
@@ -359,7 +362,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 5,
-                            Description = "Self guided cycling tour to enjoy the sights and views",
+                            Description = "Self guided cycling tour to take in the views",
                             Name = "Bike Rental",
                             Price = 8.00m,
                             TourId = 1
@@ -367,7 +370,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 6,
-                            Description = "Includes drinks and sandwiches for up to 4 people",
+                            Description = "Includes drinks, sandwiches and fruit for up to 4 people",
                             Name = "Picnic",
                             Price = 20.00m,
                             TourId = 8
@@ -375,7 +378,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 7,
-                            Description = "Includes drinks and sandwiches for up to 4 people",
+                            Description = "Includes drinks, sandwiches and fruit for up to 4 people",
                             Name = "Picnic",
                             Price = 20.00m,
                             TourId = 7
@@ -383,7 +386,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 8,
-                            Description = "Follow the route and learn about all the animals",
+                            Description = "Follow the route and see all the animals",
                             Name = "Map",
                             Price = 2.50m,
                             TourId = 8
@@ -410,7 +413,7 @@ namespace TourCompany.DataAccess.Migrations
                             Description = "Provides self-guided commentary and stories throughout the tour.",
                             Name = "Audio Guide",
                             Price = 3.00m,
-                            TourId = 13
+                            TourId = 9
                         },
                         new
                         {
@@ -463,26 +466,10 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 18,
-                            Description = "Includes drinks and sandwiches for up to 4 people",
+                            Description = "Includes drinks, sandwiches and fruit for up to 4 people",
                             Name = "Picnic",
                             Price = 20.00m,
                             TourId = 15
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Description = "Provides self-guided commentary and stories throughout the tour.",
-                            Name = "Audio Guide",
-                            Price = 4.00m,
-                            TourId = 2
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Description = "Provides self-guided commentary and stories throughout the tour.",
-                            Name = "Audio Guide",
-                            Price = 4.00m,
-                            TourId = 6
                         });
                 });
 

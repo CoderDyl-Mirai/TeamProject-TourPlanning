@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourCompany.DataAccess.DataAccess;
 
@@ -11,9 +12,11 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    partial class TourDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260417135250_SeedExtraFix")]
+    partial class SeedExtraFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -383,7 +386,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 8,
-                            Description = "Follow the route and learn about all the animals",
+                            Description = "Follow the route and see all the animals",
                             Name = "Map",
                             Price = 2.50m,
                             TourId = 8
@@ -410,7 +413,7 @@ namespace TourCompany.DataAccess.Migrations
                             Description = "Provides self-guided commentary and stories throughout the tour.",
                             Name = "Audio Guide",
                             Price = 3.00m,
-                            TourId = 13
+                            TourId = 9
                         },
                         new
                         {
@@ -467,22 +470,6 @@ namespace TourCompany.DataAccess.Migrations
                             Name = "Picnic",
                             Price = 20.00m,
                             TourId = 15
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Description = "Provides self-guided commentary and stories throughout the tour.",
-                            Name = "Audio Guide",
-                            Price = 4.00m,
-                            TourId = 2
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Description = "Provides self-guided commentary and stories throughout the tour.",
-                            Name = "Audio Guide",
-                            Price = 4.00m,
-                            TourId = 6
                         });
                 });
 

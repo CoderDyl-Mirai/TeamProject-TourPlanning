@@ -48,24 +48,26 @@ namespace TourCompany.DataAccess.DataAccess
 
             modelBuilder.Entity<Extra>()
                 .HasData(
-                new Extra { Id = 1, Name = "Picnic", Description = "", Price = 20.00m, TourId = 3 },
-                new Extra { Id = 2, Name = "Picnic", Description = "", Price = 20.00m, TourId = 1 },
-                new Extra { Id = 3, Name = "Audio Guide", Description = "", Price = 4.00m, TourId = 5 },
-                new Extra { Id = 4, Name = "Pour a Pint", Description = "", Price = 5.00m, TourId = 4 },
-                new Extra { Id = 5, Name = "Bike Rental", Description = "", Price = 8.00m, TourId = 1 },
-                new Extra { Id = 6, Name = "Picnic", Description = "", Price = 20.00m, TourId = 8 },
-                new Extra { Id = 7, Name = "Picnic", Description = "", Price = 20.00m, TourId = 7 },
-                new Extra { Id = 8, Name = "Map", Description = "", Price = 2.50m, TourId = 8 },
-                new Extra { Id = 9, Name = "Booklet", Description = "", Price = 1.00m, TourId = 9 },
-                new Extra { Id = 10, Name = "Audio Guide", Description = "", Price = 3.00m, TourId = 9 },
-                new Extra { Id = 11, Name = "Audio Guide", Description = "", Price = 3.00m, TourId = 9 },
-                new Extra { Id = 12, Name = "Wildlife Guide", Description = "", Price = 6.00m, TourId = 10 },
-                new Extra { Id = 13, Name = "Waterproof Jacket", Description = "", Price = 20.00m, TourId = 10 },
-                new Extra { Id = 14, Name = "Booklet", Description = "", Price = 5.00m, TourId = 11 },
-                new Extra { Id = 15, Name = "Recipe Book", Description = "", Price = 7.50m, TourId = 12 },
-                new Extra { Id = 16, Name = "Booklet", Description = "", Price = 5.00m, TourId = 13 },
-                new Extra { Id = 17, Name = "Booklet", Description = "", Price = 5.00m, TourId = 14 },
-                new Extra { Id = 18, Name = "Picnic", Description = "", Price = 20.00m, TourId = 15 }
+                new Extra { Id = 1, Name = "Picnic", Description = "Includes drinks and sandwiches for up to 4 people", Price = 20.00m, TourId = 3 },
+                new Extra { Id = 2, Name = "Picnic", Description = "Includes drinks and sandwiches for up to 4 people", Price = 20.00m, TourId = 1 },
+                new Extra { Id = 3, Name = "Audio Guide", Description = "Provides self-guided commentary and stories throughout the tour.", Price = 4.00m, TourId = 5 },
+                new Extra { Id = 4, Name = "Pour a Pint", Description = "Learn to pour and enjoy the perfect pint of Guinness", Price = 5.00m, TourId = 4 },
+                new Extra { Id = 5, Name = "Bike Rental", Description = "Self guided cycling tour to enjoy the sights and views", Price = 8.00m, TourId = 1 },
+                new Extra { Id = 6, Name = "Picnic", Description = "Includes drinks and sandwiches for up to 4 people", Price = 20.00m, TourId = 8 },
+                new Extra { Id = 7, Name = "Picnic", Description = "Includes drinks and sandwiches for up to 4 people", Price = 20.00m, TourId = 7 },
+                new Extra { Id = 8, Name = "Map", Description = "Follow the route and learn about all the animals", Price = 2.50m, TourId = 8 },
+                new Extra { Id = 9, Name = "Booklet", Description = "Follow the route and highlights of the city", Price = 1.00m, TourId = 9 },
+                new Extra { Id = 10, Name = "Audio Guide", Description = "Provides self-guided commentary and stories throughout the tour.", Price = 3.00m, TourId = 9 },
+                new Extra { Id = 11, Name = "Audio Guide", Description = "Provides self-guided commentary and stories throughout the tour.", Price = 3.00m, TourId = 13 },
+                new Extra { Id = 12, Name = "Wildlife Guide", Description = "Spot and learn about the various wildlife species", Price = 6.00m, TourId = 10 },
+                new Extra { Id = 13, Name = "Waterproof Jacket", Description = "Stay dry during the tour", Price = 20.00m, TourId = 10 },
+                new Extra { Id = 14, Name = "Booklet", Description = "A guide to the history and stories of the castle", Price = 5.00m, TourId = 11 },
+                new Extra { Id = 15, Name = "Recipe Book", Description = "Create your own dishes with local Irish recipes", Price = 7.50m, TourId = 12 },
+                new Extra { Id = 16, Name = "Booklet", Description = "Follow the route and highlights of the city", Price = 5.00m, TourId = 13 },
+                new Extra { Id = 17, Name = "Booklet", Description = "A guide to the history and stories of the Abbey", Price = 5.00m, TourId = 14 },
+                new Extra { Id = 18, Name = "Picnic", Description = "Includes drinks and sandwiches for up to 4 people", Price = 20.00m, TourId = 15 },
+                new Extra { Id = 19, Name = "Audio Guide", Description = "Provides self-guided commentary and stories throughout the tour.", Price = 4.00m, TourId = 2 },
+                new Extra { Id = 20, Name = "Audio Guide", Description = "Provides self-guided commentary and stories throughout the tour.", Price = 4.00m, TourId = 6 }
             );
 
         }
