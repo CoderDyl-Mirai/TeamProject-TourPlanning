@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourCompany.DataAccess.DataAccess;
 
@@ -11,9 +12,11 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    partial class TourDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260417095244_SeedAntrim")]
+    partial class SeedAntrim
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -363,110 +366,6 @@ namespace TourCompany.DataAccess.Migrations
                             Name = "Bike Rental",
                             Price = 8.00m,
                             TourId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Description = "",
-                            Name = "Picnic",
-                            Price = 20.00m,
-                            TourId = 8
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Description = "",
-                            Name = "Picnic",
-                            Price = 20.00m,
-                            TourId = 7
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Description = "",
-                            Name = "Map",
-                            Price = 2.50m,
-                            TourId = 8
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Description = "",
-                            Name = "Booklet",
-                            Price = 1.00m,
-                            TourId = 9
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Description = "",
-                            Name = "Audio Guide",
-                            Price = 3.00m,
-                            TourId = 9
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Description = "",
-                            Name = "Audio Guide",
-                            Price = 3.00m,
-                            TourId = 9
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Description = "",
-                            Name = "Wildlife Guide",
-                            Price = 6.00m,
-                            TourId = 10
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Description = "",
-                            Name = "Waterproof Jacket",
-                            Price = 20.00m,
-                            TourId = 10
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Description = "",
-                            Name = "Booklet",
-                            Price = 5.00m,
-                            TourId = 11
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Description = "",
-                            Name = "Recipe Book",
-                            Price = 7.50m,
-                            TourId = 12
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Description = "",
-                            Name = "Booklet",
-                            Price = 5.00m,
-                            TourId = 13
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Description = "",
-                            Name = "Booklet",
-                            Price = 5.00m,
-                            TourId = 14
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Description = "",
-                            Name = "Picnic",
-                            Price = 20.00m,
-                            TourId = 15
                         });
                 });
 
@@ -584,7 +483,7 @@ namespace TourCompany.DataAccess.Migrations
                         new
                         {
                             Id = 7,
-                            Description = "Embark on a 5-star rated Giant’s Causeway tour from Belfast — travel to this UNESCO World Heritage Site in a luxury, air-conditioned coach, visit stunning coastal locations, explore ancient castles, and uncover myths and legends Belfast has to offer.",
+                            Description = "Embark on a 5-star rated Giant’s Causeway tour from Belfast — travel in a luxury, air-conditioned coach, visit stunning coastal locations, explore ancient castles, and uncover myths and legends. Entry to the UNESCO World Heritage Site at the Giant’s Causeway stones is included in your ticket price.",
                             Duration = 60,
                             Image = "\\Images\\Tours\\Causeway.jpg",
                             Location = "Antrim",
@@ -604,90 +503,6 @@ namespace TourCompany.DataAccess.Migrations
                             MinCapacity = 1,
                             Name = "Belfast Zoo",
                             Price = 25.00m
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Description = "See Dublin through a local’s eyes on our walking tour, exploring its history and culture. Visit iconic landmarks like Dublin Castle and Trinity College, hear fascinating stories, and discover hidden gems while experiencing the city’s past and present in a memorable way with a local guide.",
-                            Duration = 45,
-                            Image = "\\Images\\Tours\\DublinTour.jpg",
-                            Location = "Dublin",
-                            MaxCapacity = 10,
-                            MinCapacity = 5,
-                            Name = "Walking Tour",
-                            Price = 4.00m
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Description = "Join us for a unique experience observing fin, humpback, and minke whales, along with common dolphins, basking sharks, and other marine wildlife. Enjoy breathtaking scenery as you explore the stunning waters and coastline of Cork, discovering incredible marine life on an unforgettable adventure.",
-                            Duration = 60,
-                            Image = "\\Images\\Tours\\Whale.jpg",
-                            Location = "Cork",
-                            MaxCapacity = 30,
-                            MinCapacity = 10,
-                            Name = "Whale Watching",
-                            Price = 20.00m
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Description = "Built nearly six hundred years ago by one of Ireland’s greatest chieftains, Cormac MacCarthy, this historic site has attracted attention ever since. Legend says there is a stone that, if kissed, grants eloquence: “Whoever kisses it never misses to grow eloquent.” A fascinating stop on your visiting tour in Ireland.",
-                            Duration = 80,
-                            Image = "\\Images\\Tours\\Blarney.jpg",
-                            Location = "Cork",
-                            MaxCapacity = 23,
-                            MinCapacity = 8,
-                            Name = "Blarney Castle",
-                            Price = 18.00m
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Description = "Join our food tour led by a local guide as you explore vibrant market stalls filled with fresh seasonal vegetables, poultry, beef, and game like wild Irish rabbit. Enjoy spices, chocolate, coffee bars, and sizzling sausages on the griddle while discovering authentic flavours and stories behind Cork's food culture.",
-                            Duration = 70,
-                            Image = "\\Images\\Tours\\Market.jpg",
-                            Location = "Cork",
-                            MaxCapacity = 10,
-                            MinCapacity = 6,
-                            Name = "The English Market",
-                            Price = 22.00m
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Description = "Explore Galway city with a local guide, who will make sure you see all the famous landmarks in town, but show you some hidden ones you may not find if you were on a self-guided tour.Start in Eyre Square, learn about the Browne Doorway, check out statues, castles, churches, and much more along the way.",
-                            Duration = 70,
-                            Image = "\\Images\\Tours\\Galway.jpg",
-                            Location = "Galway",
-                            MaxCapacity = 15,
-                            MinCapacity = 5,
-                            Name = "Walking Tour",
-                            Price = 5.00m
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Description = "Nestled in the heart of Connemara, on the Wild Atlantic Way, Kylemore Abbey is a haven of history, beauty and serenity. Home to a Benedictine order of Nuns for the past 100 years, Kylemore Abbey welcomes visitors from all over the world each year to embrace the magic of the magnificent 1,000-acre estate.",
-                            Duration = 180,
-                            Image = "\\Images\\Tours\\Kylemore.jpg",
-                            Location = "Galway",
-                            MaxCapacity = 20,
-                            MinCapacity = 1,
-                            Name = "Kylemore Abbey",
-                            Price = 14.00m
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Description = "Experience Connemara National Park on a full-day walking tour with a local guide. Covering 2,000 hectares of mountains, bogs, and woodlands in Galway, you’ll explore the Twelve Bens range, including Benbaun and Bencullagh. Discover the area’s natural beauty, history, and unique landscapes.",
-                            Duration = 480,
-                            Image = "\\Images\\Tours\\Connemara.jpg",
-                            Location = "Galway",
-                            MaxCapacity = 30,
-                            MinCapacity = 10,
-                            Name = "Connemara Park",
-                            Price = 30.00m
                         });
                 });
 

@@ -26,9 +26,16 @@ namespace TourCompany.Pages.Customers.Home
 
             foreach (var booking in Booking)
             {
-                if (booking.Date < DateOnly.FromDateTime(DateTime.Now) && booking.Status == "Confirmed")
+                if (!string.IsNullOrEmpty(booking.Time))
                 {
-                    booking.Status = "Completed";
+                    var bookingDate = booking.Date.ToDateTime(TimeOnly.Parse(booking.Time));
+                    var bookingTime = DateTime.Now;
+
+                    if (bookingDate < bookingTime && booking.Status == "Confirmed")
+                    {
+                        booking.Status = "Completed";
+                        _unitOfWork.BookingRepository.Update(booking);
+                    }
                 }
             }
             _unitOfWork.Save();
@@ -50,7 +57,6 @@ namespace TourCompany.Pages.Customers.Home
                     _unitOfWork.BookingRepository.Update(booking);
                     _unitOfWork.Save();
                 }
-
             }
             return RedirectToPage("BookingHistory");
         }

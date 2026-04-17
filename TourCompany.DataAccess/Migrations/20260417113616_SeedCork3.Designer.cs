@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourCompany.DataAccess.DataAccess;
 
@@ -11,9 +12,11 @@ using TourCompany.DataAccess.DataAccess;
 namespace TourCompany.DataAccess.Migrations
 {
     [DbContext(typeof(TourDBContext))]
-    partial class TourDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260417113616_SeedCork3")]
+    partial class SeedCork3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -443,30 +446,6 @@ namespace TourCompany.DataAccess.Migrations
                             Name = "Recipe Book",
                             Price = 7.50m,
                             TourId = 12
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Description = "",
-                            Name = "Booklet",
-                            Price = 5.00m,
-                            TourId = 13
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Description = "",
-                            Name = "Booklet",
-                            Price = 5.00m,
-                            TourId = 14
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Description = "",
-                            Name = "Picnic",
-                            Price = 20.00m,
-                            TourId = 15
                         });
                 });
 
@@ -652,42 +631,6 @@ namespace TourCompany.DataAccess.Migrations
                             MinCapacity = 6,
                             Name = "The English Market",
                             Price = 22.00m
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Description = "Explore Galway city with a local guide, who will make sure you see all the famous landmarks in town, but show you some hidden ones you may not find if you were on a self-guided tour.Start in Eyre Square, learn about the Browne Doorway, check out statues, castles, churches, and much more along the way.",
-                            Duration = 70,
-                            Image = "\\Images\\Tours\\Galway.jpg",
-                            Location = "Galway",
-                            MaxCapacity = 15,
-                            MinCapacity = 5,
-                            Name = "Walking Tour",
-                            Price = 5.00m
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Description = "Nestled in the heart of Connemara, on the Wild Atlantic Way, Kylemore Abbey is a haven of history, beauty and serenity. Home to a Benedictine order of Nuns for the past 100 years, Kylemore Abbey welcomes visitors from all over the world each year to embrace the magic of the magnificent 1,000-acre estate.",
-                            Duration = 180,
-                            Image = "\\Images\\Tours\\Kylemore.jpg",
-                            Location = "Galway",
-                            MaxCapacity = 20,
-                            MinCapacity = 1,
-                            Name = "Kylemore Abbey",
-                            Price = 14.00m
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Description = "Experience Connemara National Park on a full-day walking tour with a local guide. Covering 2,000 hectares of mountains, bogs, and woodlands in Galway, you’ll explore the Twelve Bens range, including Benbaun and Bencullagh. Discover the area’s natural beauty, history, and unique landscapes.",
-                            Duration = 480,
-                            Image = "\\Images\\Tours\\Connemara.jpg",
-                            Location = "Galway",
-                            MaxCapacity = 30,
-                            MinCapacity = 10,
-                            Name = "Connemara Park",
-                            Price = 30.00m
                         });
                 });
 
