@@ -2,7 +2,6 @@
 @model TourCompany.Pages.Customers.Home.IndexModel
 @{
 }
-<!-- LEFT SIDEBAR (flush to screen edge, overlays content) -->
 <div id ="filter" style="position: absolute; left: 0; top: 170px; width: 200px; height: 100%; background-color: #ffffff; padding: 1rem; overflow-y: auto; z-index: 1000;">
     <h5>Extras</h5>
     @foreach (var extra in Model.Extras)
@@ -18,7 +17,7 @@
 <button id="filterButton" style="position: absolute; left: 0; top: 120px; width: 50px; height:50px; z-index: 1001">
     <img src="/Images/filter.png" width="20" height="20" />
 </button>
-<!-- MAIN CONTENT (kept in normal container, exactly where it was) -->
+
 <div class="container">
     <main role="main" class="pb-3">
         <form class="d-flex mb-3">
@@ -27,7 +26,7 @@
             <a asp-route-Tours="" asp-route-SearchString="" class="btn btn-outline-secondary ms-2">Clear</a>
         </form>
         <div id="data">
-        @foreach (var location in Model.listOfTours.GroupBy(t => t.Location))
+        @foreach (var location in Model.listOfTours.GroupBy(t => t.Location).OrderBy(k => k.Key))
         {
             <h2 class="text-info"><b>@location.Key</b></h2>
 
@@ -86,10 +85,10 @@
             console.log("Window width:", width);
 
             if (width < 1700) {
-                $("#filter").hide(); // hide sidebar on smaller screens
+                $("#filter").hide(); 
                 $("#filterButton").show()
             } else {
-                $("#filter").show(); // show sidebar on large screens
+                $("#filter").show();
                 $("#filterButton").hide()
 
             }
@@ -97,18 +96,12 @@
         $("#filterButton").hide()
 
         $("#filterButton").click(function(){
-            $("#filter").show(); // show sidebar on large screens
+            $("#filter").show();
 
         })
 
-        
-
-        
-
-        // Run once on page load
         updateSidebar();
 
-        // Run whenever the window is resized
         $(window).resize(function() {
             updateSidebar();
         });
@@ -189,7 +182,7 @@
             </div>`;
             console.log(tour);
         });
-        filtered += `</div>`; // close row
+        filtered += `</div>`; 
     });
 
     if (filtered === ``) {
@@ -223,7 +216,7 @@
                 }
             });
 
-            filtered += `</div>`; // close row
+            filtered += `</div>`; 
         });
     }
 
