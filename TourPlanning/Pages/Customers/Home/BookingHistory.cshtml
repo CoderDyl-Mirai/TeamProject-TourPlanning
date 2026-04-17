@@ -16,16 +16,15 @@
 </div>
 
 <br />
-<br />
-<br />
 
 <div style="padding-bottom: 80px;">
-	<table class="table table-bordered table-striped">
+	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
 				<th>ID</th>
 				<th>Status</th>
 				<th>Date</th>
+				<th>Time</th>
 				<th>Name</th>
 				<th>Tickets</th>
 				<th>Price</th>
@@ -37,10 +36,27 @@
 		<tbody>
 			@foreach (var obj in Model.Booking)
 			{
-				<tr>
+
+					var row = "";
+
+					if (obj.Status == "Confirmed")
+					{
+						row = "table-success";
+					}
+					else if (obj.Status == "Cancelled")
+					{
+						row = "table-danger";
+					}
+					else if (obj.Status == "Completed")
+					{
+						row = "table-secondary";
+					}
+					
+					<tr class="@row">
 					<td width="5%">@obj.Id</td>
 					<td width="10%">@obj.Status</td>
 					<td width="10%">@obj.Date</td>
+					<td width="10%">@obj.Time</td>
 					<td width="10%">@obj.Tour.Name</td>
 					<td width="5%">@obj.TicketAmount</td>
 					<td width="10%">€@obj.TotalPrice</td>
