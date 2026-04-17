@@ -2,6 +2,11 @@
 @model TourCompany.Pages.Customers.Home.BookingModel
 @{
 }
+<style>
+	#time option:disabled {
+	color: #aaa;
+	}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <form method="post">
@@ -32,18 +37,18 @@
 				<div class="mb-3">
 					<label asp-for="@Model.Booking.Time"></label>
 					<select asp-for="@Model.Booking.Time" id="time" class="form-select">
-						<option disabled selected>Select Time</option>
-						<option>09:00</option>
-						<option>10:00</option>
-						<option>11:00</option>
-						<option>12:00</option>
-						<option>13:00</option>
-						<option>14:00</option>
-						<option>15:00</option>
-						<option>16:00</option>
-						<option>17:00</option>
-						<option>18:00</option>
-						<option>19:00</option>
+						<option value="0" disabled selected>Select Time</option>
+						<option value="09:00" data-time="0">09:00</option>
+						<option value="10:00" data-time="1">10:00</option>
+						<option value="11:00" data-time="2">11:00</option>
+						<option value="12:00" data-time="3">12:00</option>
+						<option value="13:00" data-time="4">13:00</option>
+						<option value="14:00" data-time="5">14:00</option>
+						<option value="15:00" data-time="6">15:00</option>
+						<option value="16:00" data-time="7">16:00</option>
+						<option value="17:00" data-time="8">17:00</option>
+						<option value="18:00" data-time="9">18:00</option>
+						<option value="19:00" data-time="10">19:00</option>
 
 					</select>
 					<span asp-validation-for="@Model.Booking.Date" class="text-danger"></span>
@@ -102,7 +107,7 @@
 
 		$("#totalPrice").val(totalPrice);
 
-		currentCap = 0
+		let currentCap = 0
 		console.log(bookings)
 		bookings.forEach(function(booking){
 			//console.log($("#date").val())
@@ -112,6 +117,7 @@
 			//console.log(date)
 			if (booking.status == "Confirmed")
 			{
+				console.log(booking)
 				if(date === $("#date").val() && time === $('#time option:selected').text())
 				{
 					currentCap += booking.ticketAmount
@@ -124,12 +130,8 @@
 		console.log(currentCap+Number($("#ticketAmount").val()))
 		if(currentCap+Number($("#ticketAmount").val())>@Model.Booking.Tour.MaxCapacity)
 		{
-			$("#submit").prop("disabled",true);
 			alert("Ticket amount chosen puts tour over capacity")
 			$("#ticketAmount").val(@Model.Booking.Tour.MaxCapacity-currentCap)
-		}
-		else{
-			$("#submit").prop("disabled",false);
 		}
 	}
 	$("#ticketAmount").on("change", calculateTotal);
@@ -140,39 +142,174 @@
 
 	var $dateInput = $('#date');
 
+	timeAvailableOnDay = false
+	while(!timeAvailableOnDay)
+	{
+		date = $("#date").val()
+		cap = 0
+		capAtTimes = [0,0,0,0,0,0,0,0,0,0,0]
+		bookings.forEach(booking => {
+			if(booking.date === date &&  booking.status=="Confirmed" &&
+				(booking.time === "09:00" || booking.time === "10:00"|| booking.time === "11:00"||
+				booking.time === "12:00" || booking.time === "13:00" || booking.time === "14:00"||
+				booking.time === "15:00" || booking.time === "16:00" || booking.time === "17:00"||
+				booking.time === "18:00" || booking.time === "19:00"))
+				{
+					cap += booking.ticketAmount
+					if(booking.time === "09:00"){
+						capAtTimes[0] += booking.ticketAmount
+					}
+					if(booking.time === "10:00"){
+						capAtTimes[1] += booking.ticketAmount
+					}
+					if(booking.time === "11:00"){
+						capAtTimes[2] += booking.ticketAmount
+					}
+					if(booking.time === "12:00"){
+						capAtTimes[3] += booking.ticketAmount
+					}
+					if(booking.time === "13:00"){
+						capAtTimes[4] += booking.ticketAmount
+					}
+					if(booking.time === "14:00"){
+						capAtTimes[5] += booking.ticketAmount
+					}
+					if(booking.time === "15:00"){
+						capAtTimes[6] += booking.ticketAmount
+					}
+					if(booking.time === "16:00"){
+						capAtTimes[7] += booking.ticketAmount
+					}
+					if(booking.time === "17:00"){
+						capAtTimes[8] += booking.ticketAmount
+					}
+					if(booking.time === "18:00"){
+						capAtTimes[9] += booking.ticketAmount
+					}
+					if(booking.time === "19:00"){
+						capAtTimes[10] += booking.ticketAmount
+					}
+
+				}
+		})
+		if((@Model.Booking.Tour.MaxCapacity*11)>cap)
+		{
+			for(x=0;x<11;x++)
+			{
+				if(capAtTimes[x]>=@Model.Booking.Tour.MaxCapacity)
+				{
+					$(`#time option[data-time=${x}]`).prop("disabled", true);
+				}
+			}
+			timeAvailableOnDay=true
+
+		}
+		else{
+				date = new Date(date);
+				date.setDate(date.getDate() + 1);
+
+				// format to YYYY-MM-DD
+				const formatted = date.toISOString().split('T')[0];
+
+				$("#date").val(formatted);
+					}
+				}
+
+	$("#date").on("change", function(){
+		timeAvailableOnDay = false
+		$("#time").prop("selectedIndex", 0);
+	//$("#time").prop("selectedIndex", 0);
+	while(!timeAvailableOnDay)
+	{
+		date = $("#date").val()
+		console.log(date)
+		cap = 0
+		capAtTimes = [0,0,0,0,0,0,0,0,0,0,0]
+		bookings.forEach(booking => {
+
+			if(booking.date === date &&  booking.status=="Confirmed" &&
+				(booking.time === "09:00" || booking.time === "10:00"|| booking.time === "11:00"||
+				booking.time === "12:00" || booking.time === "13:00" || booking.time === "14:00"||
+				booking.time === "15:00" || booking.time === "16:00" || booking.time === "17:00"||
+				booking.time === "18:00" || booking.time === "19:00"))
+				{
+					cap += booking.ticketAmount
+					if(booking.time === "09:00"){
+						capAtTimes[0] += booking.ticketAmount
+					}
+					if(booking.time === "10:00"){
+						capAtTimes[1] += booking.ticketAmount
+					}
+					if(booking.time === "11:00"){
+						capAtTimes[2] += booking.ticketAmount
+					}
+					if(booking.time === "12:00"){
+						capAtTimes[3] += booking.ticketAmount
+					}
+					if(booking.time === "13:00"){
+						capAtTimes[4] += booking.ticketAmount
+					}
+					if(booking.time === "14:00"){
+						capAtTimes[5] += booking.ticketAmount
+					}
+					if(booking.time === "15:00"){
+						capAtTimes[6] += booking.ticketAmount
+					}
+					if(booking.time === "16:00"){
+						capAtTimes[7] += booking.ticketAmount
+					}
+					if(booking.time === "17:00"){
+						capAtTimes[8] += booking.ticketAmount
+					}
+					if(booking.time === "18:00"){
+						capAtTimes[9] += booking.ticketAmount
+					}
+					if(booking.time === "19:00"){
+						capAtTimes[10] += booking.ticketAmount
+					}
+
+				}
+		})
+		for(x=0;x<11;x++)
+			{
+				console.log(capAtTimes[x])
+				if(capAtTimes[x]<@Model.Booking.Tour.MaxCapacity)
+				{
+					console.log(x)
+					$(`#time option[data-time=${x}]`).prop("disabled", false);
+				}
+			}
+		if((@Model.Booking.Tour.MaxCapacity*11)>cap)
+		{
+			for(x=0;x<11;x++)
+			{
+				if(capAtTimes[x]>=@Model.Booking.Tour.MaxCapacity)
+				{
+					console.log(1234)
+					$(`#time option[data-time=${x}]`).prop("disabled", true);
+				}
+			}
+			timeAvailableOnDay=true
+
+		}
+		else{
+			alert("No Bookings Available For "+date)
+				date = new Date(date);
+				date.setDate(date.getDate() + 1);
+
+				// format to YYYY-MM-DD
+				const formatted = date.toISOString().split('T')[0];
+
+				$("#date").val(formatted);
+					}
+				}
+	})
 	
 		// Snap on page load
 	//$dateInput.val(snapToHour($dateInput.val()));
 
 		// Snap whenever user changes the input
-	$dateInput.on('input change', function() {
-		//$(this).val(snapToHour($(this).val()));
-
-		currentCap = 0
-		console.log(bookings)
-		bookings.forEach(function(booking){
-			//console.log($("#date").val())
-			date = booking.date.substring(0,16)
-			//console.log(date)
-			if(date === $("#date").val())
-			{
-				currentCap += booking.ticketAmount
-			}
-		})
-		console.log(currentCap)
-		console.log(currentCap+Number($("#ticketAmount").val()))
-
-
-		if(currentCap+Number($("#ticketAmount").val())>@Model.Booking.Tour.MaxCapacity)
-		{
-			$("#submit").prop("disabled",true);
-			alert("Ticket amount chosen puts tour over capacity")
-
-		}
-		else{
-			$("#submit").prop("disabled",false);
-		}
-	});
+	
 
 
 	
@@ -180,3 +317,5 @@
 	@section Scripts{
 	<script src="https://js.stripe.com/v3/"></script>
 	}
+
+
