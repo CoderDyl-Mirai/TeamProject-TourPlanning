@@ -117,12 +117,24 @@
     });
     console.log(selectedExtras);
 
+    let extraFiltering = [
+        @foreach (var extra in Model.ExtrasFiltering)
+        {
+            @: { name: "@extra.Name", tourId: @extra.TourId },
+        }
+    ];
+
+
     let extras = [
         @foreach (var extra in Model.Extras)
         {
             @: { name: "@extra.Name", tourId: @extra.TourId },
         }
     ];
+
+    
+    console.log(tours)
+
 
     const filteredTours = {};
     const locations = [];
@@ -131,33 +143,41 @@
         if (!allLocations.includes(tour.location)) {
                     allLocations.push(tour.location);
                 }
+                
     })
-    extras.forEach(extra => {
+    console.log(allLocations)
+    extraFiltering.forEach(extra => {
         if (selectedExtras.includes(extra.name)) {
             tours.forEach(tour => {
-                console.log(tour);
+                console.log(tour.id);
                 
 
                 if (tour.id == extra.tourId) {
                     if (!filteredTours[tour.location]) {
                         filteredTours[tour.location] = [];
                     }
-                    filteredTours[tour.location].push(tour);
+                    if(!filteredTours[tour.location].includes(tour))
+                    {filteredTours[tour.location].push(tour);}
 
                     if (!locations.includes(tour.location)) {
                         locations.push(tour.location);
                     }
                     console.log(123);
                     console.log(tour);
+                    console.log("here")
                 }
             });
         }
     });
-
+    locations.sort((a, b) => a.localeCompare(b));
+    
     console.log(filteredTours);
-
+    locations.forEach(loc => {
+        filteredTours[loc].sort((a,b)=>{
+            return a.id-b.id
+        })
+    })
     let filtered = ``;
-    console.log(filtered)
     locations.forEach(loc => {
         filtered += `<h2 class="text-info"><b>${loc}</b></h2>
             <div class="row my-3" id="tours">`;
@@ -174,20 +194,18 @@
                     <img class="card-img-top img-fluid d-block mx-auto mb-3" src="${tour.image}">
                     <div class="card-body p-1 px-3">
                         <p style="font-size:13px; text-align:justify">${tour.description}</p>
-                        <a asp-page="Details" asp-route-id="${tour.id}" class="btn btn-dark form-control btn-sm p-2">
-                            View Details
-                        </a>
+                       <a href="/Customers/Home/Details?id=${tour.id}" class="btn btn-info form-control btn-sm p-2">
+                                    View Details
+                                </a>
                     </div>
                 </div>
             </div>`;
-            console.log(tour);
         });
         filtered += `</div>`; 
     });
 
     if (filtered === ``) {
         console.log(234)
-                        console.log(allLocations)
 
         allLocations.forEach(loc => {
             filtered += `<h2 class="text-info"><b>${loc}</b></h2>
@@ -206,13 +224,12 @@
                             <img class="card-img-top img-fluid d-block mx-auto mb-3" src="${tour.image}">
                             <div class="card-body p-1 px-3">
                                 <p style="font-size:13px; text-align:justify">${tour.description}</p>
-                                <a asp-page="Details" asp-route-id="${tour.id}" class="btn btn-dark form-control btn-sm p-2">
+                                <a href="/Customers/Home/Details?id=${tour.id}" class="btn btn-info form-control btn-sm p-2">
                                     View Details
                                 </a>
                             </div>
                         </div>
                     </div>`;
-                    console.log(tour);
                 }
             });
 

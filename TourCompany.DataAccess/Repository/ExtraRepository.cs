@@ -30,6 +30,14 @@ namespace TourCompany.DataAccess.Repository
 
         }
 
+        public List<Extra> GetExtras()
+        {
+            var tourExtras = _dBContext.Extras
+         .ToList();
+            return tourExtras;
+
+        }
+
 
     }
 }

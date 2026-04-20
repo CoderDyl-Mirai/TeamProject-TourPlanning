@@ -12,6 +12,8 @@ namespace TourCompany.DataAccess.Repository
         public void Update(Extra extra);
         public List<Extra> GetExtrasForTour(int id);
         public List<Extra> GetUniqueExtras();
+        public List<Extra> GetExtras();
+
 
 
     }
