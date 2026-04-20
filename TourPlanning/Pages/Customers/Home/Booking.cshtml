@@ -12,7 +12,6 @@
 <form method="post">
         <input asp-for="Booking.TourId" hidden/>
 		<input asp-for="Booking.CustomerId" hidden/>
-    <!--<input asp-for="Booking.ApplicationUserId" hidden />-->
 	<div class="border p-3 mt-4 mb-5">
 		<div class="row pb-2">
 			<h1 class="text-primary">@Model.Booking.Tour.Name</h1>
@@ -66,26 +65,32 @@
 					<span asp-validation-for="@Model.Booking.TotalPrice" class="text-danger"></span>
 				</div>
 
+				<br />
+				<div class="mb-3">
+					<h5>Extras</h5>
+
+					@foreach (var extra in Model.Extras)
+					{
+						<div class="form-check">
+							<input class="form-check-input"
+								   type="checkbox"
+								   name="choosenExtra"
+								   value="@extra.Id"
+								   data-price="@extra.Price"
+								   id="@extra.Id" />
+							<label class="form-check-label" for="@extra.Id">
+								@extra.Name €@extra.Price - @extra.Description
+							</label>
+						</div>
+					}
+				</div>
+
 			</div>
 
-			<!-- RIGHT SIDE (EXTRAS) -->
+			<!-- RIGHT SIDE  -->
 			<div class="col-md-6">
-				<h5>Extras</h5>
-
-				@foreach (var extra in Model.Extras)
-				{
-					<div class="form-check">
-						<input class="form-check-input"
-							   type="checkbox"
-							   name="choosenExtra"
-							   value="@extra.Id"
-							   data-price="@extra.Price"
-							   id="@extra.Id" />
-						<label class="form-check-label" for="@extra.Id">
-							@extra.Name €@extra.Price - @extra.Description
-						</label>
-					</div>
-				}
+				<br />
+				<img src="@Model.Booking.Tour.BookingImage" class="img-fluid rounded mb-3" style="height: 300px; width: 80%;" />
 			</div>
 		</div>
 

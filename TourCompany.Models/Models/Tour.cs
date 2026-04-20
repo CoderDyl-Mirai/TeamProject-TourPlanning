@@ -18,6 +18,7 @@ namespace TourCompany.Models.Models
         public decimal Price { get; set; }
 
         public string? Image { get; set; }
+        public string? BookingImage { get; set; }
 
         public int MaxCapacity { get; set; }
 
