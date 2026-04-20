@@ -16,6 +16,10 @@ namespace TourCompany.Pages.Customers.Home
 
         public IEnumerable<Tour> listOfTours {  get; set; }
         public IEnumerable<Extra> Extras { get; set; }
+        public IEnumerable<Extra> ExtrasFiltering { get; set; }
+
+        public IEnumerable<BookingExtra> BookingExtras { get; set; }
+
         [BindProperty(SupportsGet =true)]
 
         public string? SearchString { get; set; }
@@ -23,7 +27,8 @@ namespace TourCompany.Pages.Customers.Home
         {
             listOfTours = _unitofWork.TourRepository.GetAll();
             Extras = _unitofWork.ExtraRepository.GetUniqueExtras();
-            if(!string.IsNullOrEmpty(SearchString))
+            ExtrasFiltering = _unitofWork.ExtraRepository.GetExtras();
+            if (!string.IsNullOrEmpty(SearchString))
             {
                 listOfTours = listOfTours.Where(t => t.Name.Contains(SearchString, StringComparison.OrdinalIgnoreCase));
             }

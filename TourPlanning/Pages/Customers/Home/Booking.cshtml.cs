@@ -29,6 +29,7 @@ namespace TourCompany.Pages.Customers.Home
         public IEnumerable<int> choosenExtra { get; set; }
         public void OnGet(int id)
         {
+            
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             
@@ -43,7 +44,7 @@ namespace TourCompany.Pages.Customers.Home
                 Time = "0:00"
             };
             Extras = _unitOfWork.ExtraRepository.GetExtrasForTour(id);
-
+            
             BookingsOfTour = _unitOfWork.BookingRepository.GetBookingsOfTour(id);
 
         }
