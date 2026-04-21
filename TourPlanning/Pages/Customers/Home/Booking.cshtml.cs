@@ -96,8 +96,8 @@ namespace TourCompany.Pages.Customers.Home
                 },
 
                     Mode = "payment",
-                    SuccessUrl = domain + "/Customers/Home",
-                    CancelUrl = domain + "/Customers/Home",
+                    SuccessUrl = $"{domain}/Customers/Home/Summary?bookingId={Booking.Id}&session_id={{CHECKOUT_SESSION_ID}}",
+                    CancelUrl = $"{domain}/Customers/Home/Booking?id={Booking.TourId}"
                 };
                 var service = new SessionService();
                 Session session = service.Create(options);

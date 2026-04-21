@@ -50,5 +50,15 @@ namespace TourCompany.DataAccess.Repository
             return bookingDetails;
         }
 
+        public Booking SummaryDetails(int id)
+        {
+            var summary =_dBContext.Bookings.Include(b => b.Customer)
+                                      .Include(b => b.Tour)
+                                      .Include(b => b.BookingExtras)
+                                      .ThenInclude(be => be.Extra)
+                                      .FirstOrDefault(b => b.Id == id);
+            return summary;
+        }
+
     }
 }
